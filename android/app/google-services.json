@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "244199012754",
+    "project_id": "almezyn-91600",
+    "storage_bucket": "almezyn-91600.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244199012754:android:8d032bfd97da044256a94b",
+        "android_client_info": {
+          "package_name": "com.example.almezyn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "244199012754-modlo0bl4gg4jtncqa8qjcgrq0k023m4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlOY7mS6pNEdHZEXGMq-yAEfnjOW_OT5M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "244199012754-modlo0bl4gg4jtncqa8qjcgrq0k023m4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
