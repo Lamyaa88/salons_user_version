@@ -13,7 +13,7 @@ customSingleItemWillBeOrderedCard(
       String arabicDescription : "",
       String arabicPrice: "",
       String englishPrice: "",
-      int productQuantity : 1 ,
+      String  productQuantity : "1",
       Function onTapIncrease ,
       Function onTapDecrease ,
       Function onTapDeleteItem ,
@@ -86,7 +86,7 @@ customSingleItemWillBeOrderedCard(
 
                                   customDescriptionTextText(
                                     percentageOfHeight: .02,
-                                    text: checkDirection("2","2"),
+                                    text: checkDirection(productQuantity.toString() , productQuantity.toString()),
                                     textAlign: TextAlign.start,
                                     context: context,
                                     textColor: blackColor,
@@ -127,7 +127,7 @@ customSingleItemWillBeOrderedCard(
 
                                   customDescriptionTextText(
                                     percentageOfHeight: .02,
-                                    text: checkDirection("\$ 100" ,"\$ 100" ),
+                                    text: checkDirection(arabicPrice , englishPrice ),
                                     textAlign: TextAlign.start,
                                     context: context,
                                     textColor: blackColor,

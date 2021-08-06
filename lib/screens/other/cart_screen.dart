@@ -4,6 +4,7 @@ import 'package:almezyn/utils/constants.dart';
 import 'package:almezyn/utils/file_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
+import 'check_out_screen.dart';
 class CartScreen extends StatefulWidget {
   @override
   _CartScreenState createState() => _CartScreenState();
@@ -42,8 +43,8 @@ class _CartScreenState extends State<CartScreen> {
                         responsiveSizedBox(context : context , percentageOfHeight: .05),
                         Container(color: backGroundColor,
 
-                          child:cubit.allCartProductsModel
-                              == null ? Column(
+                          child:cubit.allCartProductsModel.total == 0
+                                ? Column(
                                 children: [
 
                                   responsiveSizedBox(context : context , percentageOfHeight: .2),
@@ -57,30 +58,37 @@ class _CartScreenState extends State<CartScreen> {
 
 
                             :
-                          Container(height: height(context)*.65,
-                            child: ListView.builder(
-                                shrinkWrap: true,
-                                physics: BouncingScrollPhysics(),
-                                scrollDirection: Axis.vertical,
-                                itemCount: cubit.allCartProductsModel.cart.cartitems.length ,
-                                itemBuilder: (context, index) {
-                                  return customSingleCartItemCard(
-                                    context: context,
-                                    onTapCard: () {
-                                      print(
-                                        "category card presswed",
-                                      );
-                                    },
-                                    imagePath:"${baseImageUrl}${cubit.allCartProductsModel.cart.cartitems[index].product.image}" ,
-                                    arabicName: cubit.allCartProductsModel.cart.cartitems[index].product.nameEn,
-                                    englishName: cubit.allCartProductsModel.cart.cartitems[index].product.nameEn,
-                                    arabicDescription: "منتج للعناية بالشعر منتج للعناية بالشعر ",
-                                    englishDescription: "Hair care Product Hair care Product " , );
-                                }),
+                          Column(
+                            children: [
+                              Container(height: height(context)*.7 ,
+                                child: ListView.builder(
+                                    shrinkWrap: true,
+                                    physics: BouncingScrollPhysics(),
+                                    scrollDirection: Axis.vertical,
+                                    itemCount: cubit.allCartProductsModel.cart.cartitems.length ,
+                                    itemBuilder: (context, index) {
+                                      return customSingleCartItemCard(
+                                        context: context,
+                                        onTapCard: () {
+                                          print(
+                                            "category card presswed",
+                                          );
+                                        },
+                                        imagePath:"${baseImageUrl}${cubit.allCartProductsModel.cart.cartitems[index].product.image}" ,
+                                        arabicName: cubit.allCartProductsModel.cart.cartitems[index].product.nameEn,
+                                        englishName: cubit.allCartProductsModel.cart.cartitems[index].product.nameEn,
+                                        arabicDescription: "${ cubit.allCartProductsModel.cart.cartitems[index].product.price} L.E" ,
+                                        englishDescription: "${ cubit.allCartProductsModel.cart.cartitems[index].product.price} L.E");
+                                    }),
+                              ),
+                              CustomButton(text: translator.translate("Checkout"), onTapButton:()
+                              { customAnimatedPushNavigation(context, CheckOutScreen());},) ,
+                            ],
                           ),
                         ),
                         responsiveSizedBox(context : context , percentageOfHeight: .05),
-//                        CustomButton(text: translator.translate("Checkout"), onTapButton:(){ customAnimatedPushNavigation(context, CheckOutScreen());},)
+//                        CustomButton(text: translator.translate("Checkout"), onTapButton:()
+//                        { customAnimatedPushNavigation(context, CheckOutScreen());},)
                       ],
                     ),
                   ) ;
