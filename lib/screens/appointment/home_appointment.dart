@@ -88,7 +88,7 @@ class _AppointmentsHomeScreenState extends State<AppointmentsHomeScreen> {
                                           Container(width: width*.9,
                                             height: height * .7,
                                             child: ListView.builder(
-                                                itemCount: cubit.barberAppointmentsMap.length
+                                                itemCount: cubit.barberAppointmentsMap["data"].length
 //                                            cubit
 //                                                .barberAppointmentsModel
 //                                                .data
@@ -270,7 +270,7 @@ class _AppointmentsHomeScreenState extends State<AppointmentsHomeScreen> {
                                                                               text:  cubit.barberAppointmentsMap["data"][index]
                                                                               ["address"].toString() == "" ? "in salon" :
                                                                               "${cubit.barberAppointmentsMap["data"][index]
-                                                                              ["address"]}" , maxLines: 3),
+                                                                              ["address"]["name"]}" , maxLines: 3),
                                                                         )
 
                                                                       ],
