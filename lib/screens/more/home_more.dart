@@ -1,5 +1,6 @@
 import 'package:almezyn/network/cache_helper.dart';
 import 'package:almezyn/screens/auth/login_screen.dart';
+import 'package:almezyn/screens/more/orders_screen.dart';
 import 'package:almezyn/screens/more/widgets/single_account_button.dart';
 import 'package:almezyn/utils/constants.dart';
 import 'package:almezyn/utils/file_export.dart';
@@ -109,7 +110,9 @@ class _MoreHomeScreenState extends State<MoreHomeScreen> {
                                     title: "My Orders",
                                     subtitle: "Order Status",
                                     iconData: Icons.motorcycle,
-                                    onTap: () {})
+                                    onTap: () {
+                                      customAnimatedPushNavigation(context, MyOrdersScreen());
+                                    })
                               ],
                             ),
                             responsiveSizedBox(

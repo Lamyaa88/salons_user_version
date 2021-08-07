@@ -51,7 +51,7 @@ class _CartScreenState extends State<CartScreen> {
 
                                   Row(mainAxisAlignment: MainAxisAlignment.center,children: [
                             customDescriptionTextText(context: context , text:
-                            "you dont have any products in your cart yet ")
+                            "you dont have any products in your cart")
                           ],),
                                 ],
                               )

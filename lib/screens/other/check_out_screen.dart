@@ -69,7 +69,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                         Row( mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(child: customDescriptionTextText(context: context ,
-                                text: "cart total is ${cubit.allCartProductsModel.total.toString() } L.E" ,percentageOfHeight:
+                                text: "cart total is ${cubit.allCartProductsModel.total.toString() }" ,percentageOfHeight:
                                 .03, textColor: blackColor , fontWeight: FontWeight.bold),),
                           ],
                         ),

@@ -10,8 +10,7 @@ class AllOrdersCubit extends Cubit<AllOrdersStates> {
   /// create object from class cubit and using this with Bloc provider
   static AllOrdersCubit get(context) => BlocProvider.of(context);
 
-  List<AllOrdersModel> AllOrders = [];
-
+AllOrdersModel allOrdersModel ;
   void getAllOrders() {
     emit(AllOrdersLoadingState());
     DioHelper.getAllData(
@@ -20,11 +19,11 @@ class AllOrdersCubit extends Cubit<AllOrdersStates> {
     ).then((value) {
       final response = value.data;
       final item = response['data'];
-      AllOrders =
-          (item as List).map((e) => AllOrdersModel.fromJson(e)).toList();
+      allOrdersModel = AllOrdersModel.fromJson(value.data) ;
+
       print("status code for all orders : ${value.statusCode}");
       print("response in all orders is  : ${response}");
-      print("all orders model :  ${AllOrders}");
+      print("all orders model :  ${allOrdersModel}");
       emit(AllOrdersGetSuccessState());
     }).catchError((error) {
       print(error);

@@ -32,10 +32,10 @@ class _PickUserLocationScreenState extends State<PickUserLocationScreen> {
     placeMarks = await placemarkFromCoordinates(pickedLat ,pickedLong);
     print(placeMarks[0].street);
     setState(() {
-      userPickedLocation  = "name: ${placeMarks[0].name} \n Street : ${placeMarks[0].street}"
-          " \n  subAdministrativeArea :${placeMarks[0].subAdministrativeArea} "
-          "\n  administrativeArea : ${placeMarks[0].administrativeArea}  "
-          "\n country :${placeMarks[0].country} ";
+      userPickedLocation  = "name: ${placeMarks[0].name}\nstreet : ${placeMarks[0].street}"
+          " \nsubAdministrativeArea : ${placeMarks[0].subAdministrativeArea} "
+          "\nadministrativeArea : ${placeMarks[0].administrativeArea}  "
+          "\ncountry : ${placeMarks[0].country} ";
       print("lcation is ${userPickedLocation}") ;
       showCustomAlertDialog(context: context ,onTapClose: (){Navigator.of(context).pop();} , onTapOk: (){
         Navigator.of(context).pop();

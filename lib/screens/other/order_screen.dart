@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:collection';
+import 'package:almezyn/screens/more/orders_screen.dart';
 import 'package:almezyn/screens/salons/single_salon_location_screen.dart';
 import 'package:almezyn/utils/check_direction.dart';
 import 'package:almezyn/utils/file_export.dart';
@@ -155,7 +156,10 @@ class _OrderScreenState extends State<OrderScreen> {
   void _makeOrder() {
     DioHelper.postData(
       url: "/make-order",
-      data: {"name": _name.text, "phone": _phone.text, "lat": lat, "lng": long, "address": _address.text},
+      data: {
+        "name": _name.text, "phone": _phone.text,
+        "lat": lat, "lng": long,
+        "address":"${location}\naddress details : ${ _address.text}"},
       token: token,
     ).then(
           (value) {
@@ -164,98 +168,9 @@ class _OrderScreenState extends State<OrderScreen> {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(value.data["message"]),
           ));
+          customPushNamedNavigation(context, MyOrdersScreen());
         }
       },
     );
   }
-
-//
-//  void showBottomSheetMenuForAddingCard(
-//      {BuildContext context, onTapAddCardButton}) {
-//    showModalBottomSheet(
-//        context: context,
-//        builder: (builder) {
-//          return map(context);
-//        });
-//  }
-//
-//  Widget map(BuildContext context) {
-//    double height = MediaQuery.of(context).size.height;
-//    double width = MediaQuery.of(context).size.width;
-//    return Row(
-//      mainAxisAlignment: MainAxisAlignment.center,
-//      children: [
-//        Container(
-//          width: width * .9,
-//          height: height,
-//          child: GoogleMap(
-//            onMapCreated: _onMapCreated,
-//            onTap: (latLng) {
-//              print('${latLng.latitude}, ${latLng.longitude}');
-//            },
-//            markers: markers,
-////            circles: circles,
-//            initialCameraPosition: CameraPosition(
-//              target: LatLng(30.074468157846702, 31.23644710292137),
-//              zoom: 11.0,
-//            ),
-//          ),
-//        ),
-//      ],
-//    );
-//  }
-//
-////  -----
-////------
-////------
-////------
-////  -------------------------------------------------------------------- all  google  maps functions and variables  here (start)
-//
-//// first _  controller
-//  Completer<GoogleMapController> _controller = Completer();
-////  static const LatLng _center =
-////  const LatLng(locationLat , locationLong );
-//
-//// second _ on map created
-//  void _onMapCreated(GoogleMapController controller) {
-//    _controller.complete(controller);
-//    setState(() {
-//      markers.add(
-//        Marker(
-//            onTap: () {
-//              customAnimatedPushNavigation(
-//                  context,
-//                  SingleSalonLocationScreen(
-//                      30.074468157846702, 31.23644710292137));
-//            },
-//            markerId: MarkerId("1"),
-//            position: LatLng(30.074468157846702, 31.23644710292137),
-//            infoWindow: InfoWindow(
-//              title: "salon name ",
-//            )),
-//      );
-//    });
-//  }
-//
-//// third _  markers
-//  var markers = HashSet<Marker>();
-//  BitmapDescriptor customMarkerImage;
-//  getCustomMarker() async {
-//    customMarkerImage = await BitmapDescriptor.fromAssetImage(
-//      ImageConfiguration.empty,
-//      'assets/images/cart.png',
-//    );
-//  }
-//
-////   finally _  circles
-//  Set<Circle> circles = Set.from([
-//    Circle(
-//        circleId: CircleId("1"),
-//        center: LatLng(24.723201041398024, 46.67196272469909),
-//        radius: 5000,
-//        fillColor: Colors.grey.withOpacity(.4),
-//        strokeWidth: 0,
-//        visible: true)
-//  ]);
-////  -------------------------------------------------------------------- (end of google maps functions part ) ,
 }
