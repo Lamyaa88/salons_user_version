@@ -10,6 +10,7 @@ customSingleBarberCardCard(
     Function onTapCard,
     bool isPlaceHolder: false,
     String englishName: "",
+    Function onTapDeleteFromSaved ,
     String arabicName: "",
     String englishSpecification: "",
     String arabicSpecification: "",
@@ -111,7 +112,7 @@ customSingleBarberCardCard(
                                                         context: context,
                                                         textColor: blackColor,
                                                         fontWeight: FontWeight.bold),),
-                                                  isCardForSaved == true ?  GestureDetector(onTap: (){},
+                                                  isCardForSaved == true ?  GestureDetector(onTap: onTapDeleteFromSaved,
                                                     child:Container(
                                                       child: Container( height: isLandscape(context)
                                                           ? 2 * height * .04

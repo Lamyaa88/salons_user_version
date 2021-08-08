@@ -28,7 +28,9 @@ savedSalonsTab({BuildContext context, Function onTapSingleSalon}) {
                       isLandscape(context) ? 2 * height  : height ,
                       width: width,
                       child:
-                      cubit.savedSalonsModel.data.length==0?Text("you have no saved salons"):
+                      cubit.savedSalonsModel.data.length==0?
+            Center(child: customDescriptionTextText(context: context ,
+            percentageOfHeight: .025 , text: "You don\'t have any saved salons ")):
 
                       ListView.builder(
                           physics: BouncingScrollPhysics(),
@@ -43,14 +45,15 @@ savedSalonsTab({BuildContext context, Function onTapSingleSalon}) {
                               onTapCard:
                                   (){customAnimatedPushNavigation(context,
 
-                                  SingleSalonDetailsScreen(cubit.savedSalonsModel.data[index].item.id.toString()));},
+                                  SingleSalonDetailsScreen(salonId: cubit.savedSalonsModel.data[index].item.id.toString(),salonLat:double
+                                      .parse( cubit.savedSalonsModel.data[index].item.location[0].lat) , salonLong:
+                                  double.parse(cubit.savedSalonsModel.data[index].item.location[0].lng),));},
                                 isCardForSavedLIst: true ,onTapDeleteFromSaved: () {
                                 print(
                                     "delete  address tapped ");
                                 DioHelper.getAllData(
                                   url:
                                   "/delete-save/${cubit.savedSalonsModel.data[index].id.toString()}",
-
                                   token: token,
                                 ).then((value) {
                                   final response =

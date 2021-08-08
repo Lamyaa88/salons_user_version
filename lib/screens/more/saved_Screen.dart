@@ -2,9 +2,13 @@
 
 import 'package:almezyn/app_cubits/categories/all_categories_cubit/all_categories_cubit.dart';
 import 'package:almezyn/app_cubits/salons/all_salons_cubit/all_salons_cubit.dart';
+import 'package:almezyn/app_cubits/saved/all_saved_barbers_cubit/all_saved_barbers_cubit.dart';
 import 'package:almezyn/app_cubits/saved/all_saved_salons_cubit/all_saved_salons_cubit.dart';
+import 'package:almezyn/screens/more/widgets/saved_barbers_tab.dart';
+import 'package:almezyn/screens/more/widgets/saved_salons_tab.dart';
 import 'package:almezyn/screens/more/widgets/saved_tap_bar.dart';
 import 'package:almezyn/screens/more/widgets/tap_bar_view_for_saved.dart';
+import 'package:almezyn/screens/products/widgets/saved_products_grid_view.dart';
 import 'package:almezyn/utils/file_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
@@ -20,6 +24,9 @@ class SavedScreen extends StatelessWidget {
         BlocProvider<AllSavedSalonsCubit>(
         create: (BuildContext context) => AllSavedSalonsCubit()..getAllSavedSalons(),
     ),
+              BlocProvider<AllSavedBarbersCubit>(
+                create: (BuildContext context) => AllSavedBarbersCubit()..getAllSavedBarbers(),
+              ),
     BlocProvider<AllCategoriesCubit>(
     create: (BuildContext context) =>
     AllCategoriesCubit()..getAllCategories(),
@@ -49,7 +56,13 @@ class SavedScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              body:tapBarViewForSaved(context: context)
+              body:TabBarView(
+                children: [
+                  savedSalonsTab(context: context),
+                  savedBarbersTab(context: context),
+                  savedProductsGridView(context: context)
+                ],
+              )
             ),
           ),
         ),

@@ -2,6 +2,7 @@ import 'package:almezyn/app_cubits/products/all_products_cubit/all_products_cubi
 import 'package:almezyn/app_cubits/products/all_products_cubit/all_products_state.dart';
 import 'package:almezyn/app_cubits/saved/all_saved_products_cubit/all_saved_products_cubit.dart';
 import 'package:almezyn/app_cubits/saved/all_saved_products_cubit/all_saved_products_state.dart';
+import 'package:almezyn/screens/more/saved_Screen.dart';
 import 'package:almezyn/screens/products/single_product_details_screen.dart';
 import 'package:almezyn/utils/constants.dart';
 import 'package:almezyn/utils/file_export.dart';
@@ -33,9 +34,8 @@ savedProductsGridView({BuildContext context}) {
                     width: width * .9,
                     child: Container(
                       child: cubit.allSavedProductsModel.data.length == 0
-                          ? customDescriptionTextText(
-                              context: context,
-                              text: translator.translate("no_result"))
+                          ?Center(child: customDescriptionTextText(context: context ,
+                          percentageOfHeight: .025 , text: "You don\'t have any saved products"))
                           : GridView.builder(
                               itemCount: cubit.allSavedProductsModel.data.length,
                               gridDelegate:
@@ -48,13 +48,44 @@ savedProductsGridView({BuildContext context}) {
                                       crossAxisSpacing: 2),
                               itemBuilder: (BuildContext context, int index) {
                                 return customSingleProductCard(
+                                  onTapDeleteFromSaved:  () {
+                                    print(
+                                        "delete  address tapped ");
+                                    DioHelper.getAllData(
+                                      url:
+                                      "/delete-save/${cubit.allSavedProductsModel.data[index].id.toString()}",
+
+                                      token: token,
+                                    ).then((value) {
+                                      final response =
+                                          value.data;
+                                      print(
+                                          "response for address is   ${response}");
+                                      print(
+                                          "status code for adding address is   ${value.statusCode}");
+                                      if(value.statusCode == 200 ){
+                                        ScaffoldMessenger
+                                            .of(context)
+                                            .showSnackBar(
+                                            SnackBar(
+                                              content: Text(value.data["message"]),
+                                            ));
+                                        customPushNamedNavigation(context, SavedScreen());
+
+                                      }
+
+                                    });
+
+                                  } ,
+
 
                                     onTapAdd: () {
-                                      _addProductToCart(itemId: cubit.allSavedProductsModel.data[index].id , context: context);
+                                      _addProductToCart(itemId: cubit.allSavedProductsModel.data[index].item.id , context: context);
 
                                     },
-                                    onTap: (){customAnimatedPushNavigation(context, SingleProductDetailsScreen(productId:cubit
-                                        .allSavedProductsModel.data[index].id.toString())) ;},
+                                    onTap: (){customAnimatedPushNavigation(context,
+                                        SingleProductDetailsScreen(productId:cubit
+                                        .allSavedProductsModel.data[index].item.id.toString())) ;},
                                     context: context,
                                     imagePath:
                                         "${baseImageUrl}${cubit.allSavedProductsModel.data[index].item.image}",
@@ -66,16 +97,13 @@ savedProductsGridView({BuildContext context}) {
                                         .allSavedProductsModel.data[index].item.descriptionEn,
                                     englishPrice: cubit
                                         .allSavedProductsModel.data[index].item.descriptionEn,
-                                    onTapCard: () {
-                                      customAnimatedPushNavigation(context, SingleProductDetailsScreen(productId:cubit
-                                          .allSavedProductsModel.data[index].id));
-                                    },
+                                    onTapCard: () {},
                                     arabicName: cubit
                                         .allSavedProductsModel.data[index].item.nameAr,
                                     arabicDescription: cubit
                                         .allSavedProductsModel.data[index].item.descriptionAr ,
                                     arabicPrice: cubit
-                                        .allSavedProductsModel.data[index].item.price);
+                                        .allSavedProductsModel.data[index].item.price );
                               }),
                     ),
                   );

@@ -5,7 +5,6 @@ import 'package:almezyn/app_cubits/salon/single_salon_cubit/single_salon_state.d
 import 'package:almezyn/screens/barbers/single_barber_details.dart';
 import 'package:almezyn/screens/salons/single_salon_location_screen.dart';
 import 'package:almezyn/screens/salons/widgets/salon_details_first_tap.dart';
-import 'package:almezyn/screens/salons/widgets/salon_details_second_tap.dart';
 import 'package:almezyn/screens/salons/widgets/tab_bar_for_single_salon_details.dart';
 import 'package:almezyn/utils/check_direction.dart';
 import 'package:almezyn/utils/constants.dart';
@@ -15,32 +14,35 @@ import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 class SingleSalonDetailsScreen extends StatefulWidget {
   final String salonId ;
-  SingleSalonDetailsScreen(this.salonId);
+  final double salonLat ;
+  final double salonLong ;
+  SingleSalonDetailsScreen({this.salonId , this.salonLat , this.salonLong});
   @override
-  _SingleSalonDetailsScreenState createState() => _SingleSalonDetailsScreenState(salonId);
+  _SingleSalonDetailsScreenState createState() => _SingleSalonDetailsScreenState(salonId , salonLat , salonLong);
 }
 class _SingleSalonDetailsScreenState extends State<SingleSalonDetailsScreen> {
   final String salonId ;
-  _SingleSalonDetailsScreenState(this.salonId);
-  double salonLat ;
-  double salonLong ;
+  final double salonLat ;
+  final double salonLong ;
+  _SingleSalonDetailsScreenState(this.salonId , this.salonLat , this.salonLong );
+
   List<Placemark> placeMarks = [];
   String userPickedLocation = "";
   @override
   void initState() {
-    DioHelper.getAllData(
-      url: "/salon/${salonId}",
-      token: token,
-    ).then((value) {
-          value.data;
-      if(value.statusCode == 200 ){
-        setState(() {
-          salonLat = double.parse(value.data["data"]["location"][0]["lat"]);
-          salonLong = double.parse(value.data["data"]["location"][0]["lng"]);
-          print(" salon cordinates is ${salonLat} , ${salonLong}");
-          print("salonlat type is ${salonLat.runtimeType}");
-        }
-          );}});
+//    DioHelper.getAllData(
+//      url: "/salon/${salonId}",
+//      token: token,
+//    ).then((value) {
+//          value.data;
+//      if(value.statusCode == 200 ){
+//        setState(() {
+//          salonLat = double.parse(value.data["data"]["location"][0]["lat"]);
+//          salonLong = double.parse(value.data["data"]["location"][0]["lng"]);
+//          print(" salon cordinates is ${salonLat} , ${salonLong}");
+//          print("salonlat type is ${salonLat.runtimeType}");
+//        }
+//          );}});
     getSalonAddress(salonLat,salonLong) ;
     super.initState();
   }

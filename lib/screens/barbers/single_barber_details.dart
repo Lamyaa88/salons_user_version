@@ -55,7 +55,7 @@ class _SingleBarberDetailsScreenState extends State<SingleBarberDetailsScreen> {
                     child: Column(
                       children: [
                         Container(
-                          height: height * .85,
+                          height: height * .75,
                           child: SingleChildScrollView(
                             child: Column(
                               children: [
@@ -554,6 +554,15 @@ class _SingleBarberDetailsScreenState extends State<SingleBarberDetailsScreen> {
                                         .toString(),
                                     salonId: salonId.toString()));
                           },
+                        ) ,
+                        responsiveSizedBox(
+                            context: context, percentageOfHeight: .02),
+                        CustomButton( buttonColor: greyColor,
+                          text: "Save Barber",
+                          onTapButton: () {
+//                            showBottomSheetMenuForAddingCard(context: context , onTapAddCardButton: (){});
+                          _onTapSaveBarber(cubit.singleBarberMap["data"]["id"].toString());
+                          },
                         )
                       ],
                     ),
@@ -566,6 +575,35 @@ class _SingleBarberDetailsScreenState extends State<SingleBarberDetailsScreen> {
         ),
       ),
     );
+  }
+
+
+  _onTapSaveBarber( id ){
+    print(
+        "save salon tapped ");
+
+    DioHelper.postData(
+      url: "/store-save",
+      data: {
+        "type":"barber",
+        "item_id": id
+      },
+      token: token,
+    ).then((value) {
+      final response =
+          value.data;
+      print(
+          "response for address is   ${response}");
+      print(
+          "status code for adding address is   ${value.statusCode}");
+      ScaffoldMessenger.of(
+          context)
+          .showSnackBar(
+          SnackBar(
+            content: Text(value.data["message"]),
+            padding: EdgeInsets.only(bottom: 40),
+          ));
+    });
   }
 
   void showBottomSheetMenuForAddingCard(
@@ -825,260 +863,3 @@ class _SingleBarberDetailsScreenState extends State<SingleBarberDetailsScreen> {
   }
 }
 
-//---------------------
-//Scaffold(
-//backgroundColor: whiteColor,
-//body: Container(
-//child:CustomBuildBody(
-//backNotDrawerIcon: true,
-//isWithoutLogo: true,
-//headerText:"name",
-//paddingPercentageForBody: 0.0,
-//columnOfWidgets: Column(
-//children: [
-//Container(
-//height: height,
-//child: NestedScrollView(
-//headerSliverBuilder: (BuildContext context,
-//    bool innerBoxIsScrolled) {
-//return <Widget>[
-//SliverAppBar(
-//automaticallyImplyLeading: false,
-//leading: null,
-//expandedHeight: isLandscape(context)
-//? 2 * height * .5
-//    : height * .5,
-//backgroundColor: whiteColor,
-//floating: false,
-//pinned: false,
-//flexibleSpace: FlexibleSpaceBar(
-//background: Container(
-//child:
-//Column(
-//children: [
-//Container(
-//height: height * .5,
-//width: width,
-//decoration: BoxDecoration(
-//borderRadius:
-//BorderRadius
-//    .circular(8),
-//image: DecorationImage(
-//image: NetworkImage(
-//"https://assets.entrepreneur.com/content/3x2/2000/20190502194704-ent19-june-editorsnote.jpeg"
-//
-//),
-//fit: BoxFit.cover)))
-//],
-//),
-//)),
-//),
-//];
-//},
-//body: Container(
-//padding: EdgeInsets.only(
-//right: width * .05,
-//left: width * .05),
-//child: SingleChildScrollView(
-//child: Column(
-//children: [
-//responsiveSizedBox(context: context , percentageOfHeight: .02),
-//customDescriptionTextText(context: context,
-//text: checkDirection("name",
-//"name"), percentageOfHeight:
-//.035, textColor: blackColor, textAlign: TextAlign.start, fontWeight: FontWeight.bold),
-//responsiveSizedBox(context: context , percentageOfHeight: .02),
-//Row(children: [
-//customDescriptionTextText(context: context,
-//text: "Specifications", percentageOfHeight:
-//.028 , textAlign: TextAlign.start ),
-//],),
-//
-//responsiveSizedBox(context: context , percentageOfHeight: .02),
-//
-//Container(
-//width: width * .9,
-//child: Row(
-//mainAxisAlignment:
-//MainAxisAlignment
-//    .start,
-//children: [
-//
-//Container(
-//width:
-//width *
-//.9,
-//height: isLandscape(
-//context)
-//? 2 *
-//height *
-//.1
-//: height *
-//.1,
-//child: ListView.builder(
-////                                          shrinkWrap: true,
-////                                        physics: BouncingScrollPhysics(),
-//scrollDirection: Axis.horizontal,
-//itemCount: 10 ,
-////                                                    cubit.singleBarberModel.data.specifications.length,
-//itemBuilder: (context, indexForServices) {
-//return Row(
-//children: [
-//Container(margin: EdgeInsets.only(left: width*.02),
-//width: width*.5,height: height*.08,
-//decoration: BoxDecoration(color: backGroundColor , borderRadius:
-//BorderRadius.circular(8)),child: Center(child: customDescriptionTextText(context: context,text: "Hair Cut " , percentageOfHeight: .02),),
-//
-//
-//),
-//],
-//);
-//})),
-//],
-//),
-//),
-//
-//responsiveSizedBox(context: context , percentageOfHeight: .02),
-//Row(children: [
-//customDescriptionTextText(context: context,
-//text: "Services", percentageOfHeight:
-//.028 , textAlign: TextAlign.start ),
-//],),
-//Container(
-//width:
-//width *
-//.9,
-//height: isLandscape(
-//context)
-//? 2 *
-//height *
-//.1
-//: height *
-//.1,
-//child: ListView.builder(
-////                                          shrinkWrap: true,
-////                                        physics: BouncingScrollPhysics(),
-//scrollDirection: Axis.horizontal,
-//itemCount: 10 ,
-////                                                    cubit.singleBarberModel.data.specifications.length,
-//itemBuilder: (context, indexForServices) {
-//return Row(
-//children: [
-//Container(margin: EdgeInsets.only(left: width*.02),
-//width: width*.5,height: height*.08,
-//decoration: BoxDecoration(color: backGroundColor , borderRadius:
-//BorderRadius.circular(8)),child: Center(child: customDescriptionTextText(context: context,text: "Hair Cut " , percentageOfHeight: .02),),
-//
-//
-//),
-//],
-//);
-//})),
-//responsiveSizedBox(context: context , percentageOfHeight: .02),
-//Row(children: [
-//customDescriptionTextText(context: context,
-//text: "Avialability", percentageOfHeight:
-//.028 , textAlign: TextAlign.start ),
-//],),
-//Container(
-//width:
-//width *
-//.9,
-//height: isLandscape(
-//context)
-//? 2 *
-//height *
-//.1
-//: height *
-//.1,
-//child: ListView.builder(
-////                                          shrinkWrap: true,
-////                                        physics: BouncingScrollPhysics(),
-//scrollDirection: Axis.horizontal,
-//itemCount: 10 ,
-////                                                    cubit.singleBarberModel.data.specifications.length,
-//itemBuilder: (context, indexForServices) {
-//return Row(
-//children: [
-//Container(margin: EdgeInsets.only(left: width*.02),
-//width: width*.5,height: height*.08,
-//decoration: BoxDecoration(color: backGroundColor , borderRadius:
-//BorderRadius.circular(8)),child: Center(child: customDescriptionTextText(context: context,text: "Hair Cut " , percentageOfHeight: .02),),
-//
-//
-//),
-//],
-//);
-//})),
-//responsiveSizedBox(context: context , percentageOfHeight: .02),
-//Row(mainAxisAlignment : MainAxisAlignment.spaceBetween,
-//children: [
-//customDescriptionTextText(context: context,
-//text: "Reviews", percentageOfHeight:
-//.028 , textAlign: TextAlign.start ),
-//GestureDetector(onTap: (){},
-//child: customDescriptionTextText(context: context,
-//text: "view all", percentageOfHeight:
-//.028 , textAlign: TextAlign.start ,textColor: blueColor ),)
-//],),
-//responsiveSizedBox(context: context , percentageOfHeight: .02),
-//
-//Container(
-//width:
-//width *
-//.9,
-//height: isLandscape(
-//context)
-//? 2 *
-//height *
-//.1
-//: height *
-//.1,
-//child: ListView.builder(
-////                                          shrinkWrap: true,
-////                                        physics: BouncingScrollPhysics(),
-//scrollDirection: Axis.horizontal,
-//itemCount: 10 ,
-////                                                    cubit.singleBarberModel.data.specifications.length,
-//itemBuilder: (context, indexForServices) {
-//return Row(
-//children: [
-//Container(margin: EdgeInsets.only(left: width*.02),
-//width: width*.7,height: height*.08,
-//decoration: BoxDecoration(color: backGroundColor , borderRadius:
-//BorderRadius.circular(8)),child: Row(children: [
-//SizedBox(width: width*.03,),
-//Icon(Icons.star, size: height*.03
-//,color: yellowColor,) ,
-//SizedBox(width: width*.03,),
-//customDescriptionTextText(context: context,text: "4.5" ,textColor: Colors.black, percentageOfHeight: .022),
-//SizedBox(width: width*.03,),
-//customDescriptionTextText(context: context,text: "very good barber" , percentageOfHeight: .02)
-//
-//],),
-//
-//
-//),
-//],
-//);
-//})),
-//responsiveSizedBox(context: context , percentageOfHeight: .01),
-//
-//
-//
-//CustomButton(text: "Book Appointment", onTapButton: (){showBottomSheetMenuForAddingCard(context: context);},)
-//
-//
-//],
-//
-//),
-//),
-//)),
-//),
-//],
-//),
-//
-//))
-//
-//
-//)

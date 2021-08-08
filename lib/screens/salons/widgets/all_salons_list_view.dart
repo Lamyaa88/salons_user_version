@@ -2,6 +2,7 @@ import 'package:almezyn/app_cubits/salons/all_salons_cubit/all_salons_cubit.dart
 import 'package:almezyn/app_cubits/salons/all_salons_cubit/all_salons_state.dart';
 import 'package:almezyn/custom_widgets/custom_single_salon_card.dart';
 import 'package:almezyn/screens/salons/single_salon_details_screen.dart';
+import 'package:almezyn/utils/constants.dart';
 import 'package:almezyn/utils/file_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,11 +34,13 @@ allSalonsListView2({BuildContext context, Function onTapSingleSalon}) {
                               context: context,
                               onTapCard:
                               (){customAnimatedPushNavigation(context,
-                                  SingleSalonDetailsScreen(cubit.allSalonsModel.data[index].id.toString()));},
+                                  SingleSalonDetailsScreen(salonId: cubit.allSalonsModel.data[index].id.toString(),salonLat:
+                                  double.parse(cubit.allSalonsModel.data[index].location[0].lat),
+                                    salonLong: double.parse(cubit.allSalonsModel.data[index].location[0].lat),));},
                               arabicName:  cubit.allSalonsModel.data[index].nameAr ,
                               englishName:cubit.allSalonsModel.data[index].nameEn ,
                               imagePath2:cubit.allSalonsModel.data[index].images[0],
-                              imagePath:cubit.allSalonsModel.data[index].images[0] ,
+                              imagePath:"${baseImageUrl}${cubit.allSalonsModel.data[index].images.toString()}",
                               arabicDescription:   cubit.allSalonsModel.data[index].descriptionAr  ,
                               englishDescription: cubit.allSalonsModel.data[index].descriptionEn,
                               specialitiesList: cubit.allSalonsModel.data[index].specialities

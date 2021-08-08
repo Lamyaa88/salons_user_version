@@ -1,6 +1,7 @@
 import 'package:almezyn/network/cache_helper.dart';
 import 'package:almezyn/screens/auth/login_screen.dart';
 import 'package:almezyn/screens/more/orders_screen.dart';
+import 'package:almezyn/screens/more/saved_Screen.dart';
 import 'package:almezyn/screens/more/widgets/single_account_button.dart';
 import 'package:almezyn/utils/constants.dart';
 import 'package:almezyn/utils/file_export.dart';
@@ -157,7 +158,9 @@ class _MoreHomeScreenState extends State<MoreHomeScreen> {
                                     title: "Saved",
                                     subtitle: "Salons And Products",
                                     iconData: Icons.bookmark,
-                                    onTap: () {}),
+                                    onTap: () {
+                                      customAnimatedPushNavigation(context, SavedScreen());
+                                    }),
                                 singleAccountCard(
                                     context: context,
                                     title: "Contact Us",

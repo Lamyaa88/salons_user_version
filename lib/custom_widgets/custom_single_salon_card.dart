@@ -68,7 +68,7 @@ customSingleSalonCard(
                                             image: NetworkImage(
                                                 imagePath == null
                                                     ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJxMQ1Hx-kAq3vC1UmrjBHBdT0eU5Yci4x6m-XWv3QVpaUOd5QFmwNyTiRf09N1OmBAvQ&usqp=CAU"
-                                                    :"${baseImageUrl}${imagePath}"),
+                                                    :imagePath),
                                             fit: BoxFit.cover,
                                           ),
                                           borderRadius:

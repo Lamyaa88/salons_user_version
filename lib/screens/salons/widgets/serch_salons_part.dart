@@ -42,7 +42,10 @@ searchSalonsPart({ BuildContext context , String searchWord }){
                                         context: context,
                                         onTapCard:
                                             (){customAnimatedPushNavigation(context,
-                                            SingleSalonDetailsScreen(cubit.searchSalonssModel.data[index].id.toString()));},
+                                            SingleSalonDetailsScreen( salonId:cubit.searchSalonssModel.data[index].id.toString() ,
+                                                salonLat: double.parse(cubit.searchSalonssModel.data[index].location[0].lat) ,
+                                            salonLong:double.parse(cubit.searchSalonssModel.data[index].location[0].lng),));},
+
                                         arabicName:  cubit.searchSalonssModel.data[index].nameAr ,
                                         englishName:cubit.searchSalonssModel.data[index].nameEn ,
                                         imagePath2:cubit.searchSalonssModel.data[index].images[0],

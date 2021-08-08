@@ -9,6 +9,7 @@ customSingleProductCard(
       Function onTap ,
       bool isPlaceHolder: false,
       String englishName: "",
+        Function  onTapDeleteFromSaved ,
       String arabicName: "",
       String englishDescription : "",
       String arabicDescription : "",
@@ -77,14 +78,27 @@ customSingleProductCard(
                 : height * .25,
               width: width * .44,
 
-            child: GestureDetector(onTap: onTapAdd,
-              child: Neumorphic(
-                child: Container( height: isLandscape(context)
-                    ? 2 * height * .06
-                    : height * .06,
-                  width: width * .12, decoration:
-                  BoxDecoration(color: blueColor),child: Center(child: Icon(Icons.add ,color: whiteColor,),),),
-              ),
+            child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(onTap: onTapAdd,
+                  child: Neumorphic(
+                    child: Container( height: isLandscape(context)
+                        ? 2 * height * .06
+                        : height * .06,
+                      width: width * .12, decoration:
+                      BoxDecoration(color: blueColor),child: Center(child: Icon(Icons.add ,color: whiteColor,),),),
+                  ),
+                ),
+                GestureDetector(onTap: onTapDeleteFromSaved,
+                  child: Neumorphic(
+                    child: Container( height: isLandscape(context)
+                        ? 2 * height * .06
+                        : height * .06,
+                      width: width * .12, decoration:
+                      BoxDecoration(color: whiteColor),child: Center(child: Icon(Icons.delete_outline ,color: Colors.red,),),),
+                  ),
+                ),
+              ],
             )
           ),
 

@@ -10,22 +10,14 @@ class AllSavedBarbersCubit extends Cubit<AllSavedBarbersStates> {
 
   /// create object from class cubit and using this with Bloc provider
   static AllSavedBarbersCubit get(context) => BlocProvider.of(context);
-
-  List<AllSavedBarbersModel> AllSavedBarbers = [];
-
+  AllSavedBarbersModel allSavedBarbersModel ;
   void getAllSavedBarbers() {
     emit(AllSavedBarbersLoadingState());
     DioHelper.getAllData(
       url: '/saved-barbers',
       token: token,
     ).then((value) {
-      final response = value.data;
-      final item = response['data'];
-      AllSavedBarbers =
-          (item as List).map((e) => AllSavedBarbersModel.fromJson(e)).toList();
-      print("status code for all SavedBarbers : ${value.statusCode}");
-      print("response in all SavedBarbers is  : ${response}");
-      print("all SavedBarbers model :  ${AllSavedBarbers}");
+   allSavedBarbersModel =AllSavedBarbersModel.fromJson(value.data);
       emit(AllSavedBarbersGetSuccessState());
     }).catchError((error) {
       print(error);

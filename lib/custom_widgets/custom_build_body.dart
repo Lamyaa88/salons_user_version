@@ -80,8 +80,9 @@ final  double paddingPercentageForHeader;
 
                           customHeaderIcon(
                               context: context,
-                              iconData: Icons.favorite_outline_outlined ,
+                              iconData: Icons.bookmark_border,
                               onTapHeaderIcon: (){
+                                customAnimatedPushNavigation(context, SavedScreen());
 
                               }
                           ),
