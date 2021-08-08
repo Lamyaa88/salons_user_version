@@ -2,8 +2,9 @@ import 'package:almezyn/app_cubits/offers/all_offers_cubit/all_offers_cubit.dart
 import 'package:almezyn/app_cubits/offers/all_offers_cubit/all_offers_state.dart';
 import 'package:almezyn/utils/file_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:almezyn/screens/products/single_offer_details.dart';
 
-offersListView({BuildContext context}){
+offersListView({BuildContext context }){
   double height = MediaQuery.of(context).size.height;
   double width = MediaQuery.of(context).size.width;
 
@@ -22,7 +23,9 @@ offersListView({BuildContext context}){
                     itemCount:  cubit.allOffersModel.data.length ,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
-                      return customSingleCategoryCard(context: context   ,
+                      return customSingleCategoryCard(context: context   ,onTapCard:
+                          (){customAnimatedPushNavigation(context,
+                              SingleOfferDetailsScreen(offerId: cubit.allOffersModel.data[index].id.toString(),)) ;},
                           englishTitle: cubit.allOffersModel.data[index].nameEn,
                           imagePath:cubit.allOffersModel.data[index].image);
                     }),

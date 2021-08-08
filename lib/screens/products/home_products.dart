@@ -5,6 +5,7 @@ import 'package:almezyn/network/cache_helper.dart';
 import 'package:almezyn/screens/products/widgets/categories_list_view.dart';
 import 'package:almezyn/screens/products/widgets/searchPart.dart';
 import 'package:almezyn/screens/products/widgets/user_name_and_image_top_part.dart';
+import 'package:almezyn/screens/salons/widgets/offers_list_view.dart';
 import 'package:almezyn/utils/file_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -122,6 +123,15 @@ class _ProductsHomeScreenState extends State<ProductsHomeScreen> {
                                               responsiveSizedBox(
                                                   context: context,
                                                   percentageOfHeight: .03),
+                                              boldTitleRow(
+                                                  onTapViewMore: (){customAnimatedPushNavigation(context, AllProductsScreen());},
+                                                  context: context,
+                                                  text: "Offers"),
+                                              offersListView(context : context ,) ,
+                                              responsiveSizedBox(
+                                                  context: context,
+                                                  percentageOfHeight: .33),
+
                                             ],
                                           ),
                                         ],
