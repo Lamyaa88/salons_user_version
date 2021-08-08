@@ -1,24 +1,24 @@
+import 'package:almezyn/app_cubits/ads/single_ad_cubit/single_ad_cubit.dart';
 import 'package:almezyn/app_cubits/offers/single_offer_cubit/single_offer_cubit.dart';
 import 'package:almezyn/app_cubits/offers/single_offer_cubit/single_offer_state.dart';
-import 'package:almezyn/app_cubits/products/single_product_cubit/single_product_cubit.dart';
-import 'package:almezyn/app_cubits/products/single_product_cubit/single_product_state.dart';
 import 'package:almezyn/utils/check_direction.dart';
 import 'package:almezyn/utils/constants.dart';
 import 'package:almezyn/utils/file_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/services.dart';
-class SingleOfferDetailsScreen extends StatefulWidget {
+import 'package:url_launcher/url_launcher.dart';
+class SingleAdDetailsScreen extends StatefulWidget {
   final offerId;
-  SingleOfferDetailsScreen({this.offerId});
+  SingleAdDetailsScreen({this.offerId});
   @override
-  _SingleOfferDetailsScreenState createState() =>
-      _SingleOfferDetailsScreenState(offerId);
+  _SingleAdDetailsScreenState createState() =>
+      _SingleAdDetailsScreenState(offerId);
 }
-class _SingleOfferDetailsScreenState
-    extends State<SingleOfferDetailsScreen> {
+class _SingleAdDetailsScreenState
+    extends State<SingleAdDetailsScreen> {
   @override
   final offerId;
-  _SingleOfferDetailsScreenState(this.offerId);
+  _SingleAdDetailsScreenState(this.offerId);
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -27,11 +27,11 @@ class _SingleOfferDetailsScreenState
       color: whiteColor,
       child: BlocProvider(
         create: (BuildContext context) =>
-            SingleOfferCubit()..getSingleOffer(offerId.toString()),
-        child: BlocConsumer<SingleOfferCubit, SingleOfferStates>(
+        SingleOfferCubit2()..getSingleOffer2(offerId.toString()),
+        child: BlocConsumer<SingleOfferCubit2, SingleOfferStates>(
           listener: (context, state) {},
           builder: (context, state) {
-            var cubit = SingleOfferCubit.get(context);
+            var cubit = SingleOfferCubit2.get(context);
 
             if (state is! SingleOfferLoadingState) {
               return Scaffold(
@@ -87,31 +87,16 @@ class _SingleOfferDetailsScreenState
 
                           responsiveSizedBox(
                               context: context, percentageOfHeight: .01),
-                          customDescriptionTextText ( context: context,text:
-                            " L.E ${checkDirection(
-                                cubit.singleOfferModel.data.value,
-                                cubit.singleOfferModel.data.value)}",
-                              percentageOfHeight: .03,
-                              maxLines: 5),
+
                           responsiveSizedBox(
                               context: context, percentageOfHeight: .01),
-
-                          customDescriptionTextText(
-                              context: context,
-                              text: checkDirection(
-                                " ${cubit.singleOfferModel.data.code}",
-                                " ${cubit.singleOfferModel.data.code}",
-                              ),
-                              percentageOfHeight: .03),
                           responsiveSizedBox(
                               context: context, percentageOfHeight: .02),
 //
                           CustomButton(
-                            text: "Copy",
+                            text: "show more details",
                             onTapButton: () {
-                              Clipboard.setData(ClipboardData(text:cubit.singleOfferModel.data.code)).then((value) =>
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(content: Text("${cubit.singleOfferModel.data.code} copied sucesfully to your clipboard ! "))));
+                             _launchURL(cubit.singleOfferModel.data.link);
                             },
                           ),
                           responsiveSizedBox(
@@ -128,4 +113,13 @@ class _SingleOfferDetailsScreenState
         ),
       ),
     );
-  }}
+  }
+  _launchURL(String url) async {
+    url = url ;
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+}

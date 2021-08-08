@@ -10,6 +10,7 @@ import 'package:almezyn/utils/file_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:almezyn/screens/products/all_products_screen.dart';
+import 'package:almezyn/screens/barbers/widgets/ads_listview.dart';
 class ProductsHomeScreen extends StatefulWidget {
   @override
   _ProductsHomeScreenState createState() => _ProductsHomeScreenState();
@@ -76,9 +77,9 @@ class _ProductsHomeScreenState extends State<ProductsHomeScreen> {
                             create: (BuildContext context) =>
                                 AllCategoriesCubit()..getAllCategories(),
                           ),
-                          BlocProvider<AllAdsCubit>(
+                          BlocProvider<AllOffersCubit2>(
                             create: (BuildContext context) =>
-                                AllAdsCubit()..getAllAds(),
+                            AllOffersCubit2()..getAllOffers2(),
                           ),
                         ],
                         child: ListView(
@@ -130,7 +131,16 @@ class _ProductsHomeScreenState extends State<ProductsHomeScreen> {
                                               offersListView(context : context ,) ,
                                               responsiveSizedBox(
                                                   context: context,
+                                                  percentageOfHeight: .03),
+                                              boldTitleRow(
+                                                  onTapViewMore: (){customAnimatedPushNavigation(context, AllProductsScreen());},
+                                                  context: context,
+                                                  text: "Ads"),
+                                              adsListView(context : context),
+                                              responsiveSizedBox(
+                                                  context: context,
                                                   percentageOfHeight: .33),
+
 
                                             ],
                                           ),

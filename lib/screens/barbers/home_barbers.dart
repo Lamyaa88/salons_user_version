@@ -1,7 +1,7 @@
 import 'package:almezyn/app_cubits/ads/all_ads_cubit/all_ads_cubit.dart';
 import 'package:almezyn/app_cubits/offers/all_offers_cubit/all_offers_cubit.dart';
 import 'package:almezyn/screens/barbers/widgets/top_slider.dart';
-import 'package:almezyn/screens/salons/widgets/offers_list_view.dart';
+import 'package:almezyn/screens/barbers/widgets/ads_listview.dart';
 import 'package:almezyn/screens/barbers/widgets/search_barbers_part.dart';
 import 'package:almezyn/utils/file_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -65,8 +65,9 @@ class _BarbersHomeScreenState extends State<BarbersHomeScreen> {
                             create: (BuildContext context) =>
                             AllOffersCubit()..getAllOffers(),
                           ),
-                          BlocProvider<AllAdsCubit>(
-                            create: (BuildContext context) => AllAdsCubit()..getAllAds(),
+                          BlocProvider<AllOffersCubit2>(
+                            create: (BuildContext context) =>
+                            AllOffersCubit2()..getAllOffers2(),
                           ),
 
 
@@ -98,9 +99,9 @@ class _BarbersHomeScreenState extends State<BarbersHomeScreen> {
                                       responsiveSizedBox(context: context, percentageOfHeight: .03) ,
                                       specificationListView(context : context),
                                       responsiveSizedBox(context: context, percentageOfHeight: .03) ,
-                                      boldTitleRow(context: context , text: "Offers") ,
+                                      boldTitleRow(context: context , text: "ads") ,
                                       responsiveSizedBox(context: context, percentageOfHeight: .03) ,
-                                      offersListView(context : context) ,
+                                     adsListView(context: context),
                                       responsiveSizedBox(context: context, percentageOfHeight: .03)
                                       ,],),],):searchBarbersPart(context : context , searchWord: searchInputs)),
                             responsiveSizedBox(context: context, percentageOfHeight: .3) ,
