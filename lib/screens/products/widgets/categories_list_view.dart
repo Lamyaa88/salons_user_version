@@ -2,6 +2,7 @@ import 'package:almezyn/app_cubits/categories/all_categories_cubit/all_categorie
 import 'package:almezyn/app_cubits/categories/all_categories_cubit/all_categories_state.dart';
 import 'package:almezyn/utils/file_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:almezyn/screens/products/single_product_category_screen.dart';
 
 categoriesListView({BuildContext context}){
   double height = MediaQuery.of(context).size.height;
@@ -41,6 +42,11 @@ categoriesListView({BuildContext context}){
                         (context,
                         index) {
                       return customSingleCategoryCard(
+                        onTapCard: (){
+                          {
+                            customAnimatedPushNavigation(context, SingleCategoryProductScreen());
+                          }
+                        },
                           context:
                           context,
                           englishTitle: cubit
