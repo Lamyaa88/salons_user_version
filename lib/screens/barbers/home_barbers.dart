@@ -18,7 +18,6 @@ class _BarbersHomeScreenState extends State<BarbersHomeScreen> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: Colors.black,
       body: NetworkIndicator(
         child: CustomBuildBody(
           onTapBackIcon: (){Navigator.pop(context);},
