@@ -25,6 +25,11 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:toast/toast.dart';
 import 'package:almezyn/custom_widgets/entry_field.dart';
+import 'dart:async';
+import 'dart:convert' show json;
+import "package:http/http.dart" as http;
+import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -33,9 +38,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   String phone, password;
-  TextEditingController _phone= TextEditingController();
+  TextEditingController _phone = TextEditingController();
   TextEditingController _password = TextEditingController();
-
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -63,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
 //              CacheHelper.putStringData(
 //                      key: 'token', value: state.usersModals.accessToken)
 //                  .then((value) {
-                customPushNamedNavigation(context,  AppTab());
+              customPushNamedNavigation(context, AppTab());
 //              }
 //            );
             }
@@ -80,196 +84,267 @@ class _LoginScreenState extends State<LoginScreen> {
               paddingPercentageForBody: 0.0,
               columnOfWidgets: Column(
                 children: [
-                  Container(height: isLandscape(context)
-                  ? 2 * height * .8
-                  : height * .8,
-              child: SingleChildScrollView(
-                child:  Form(
-                  key: _formKey,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        SingleChildScrollView(
+                  Container(
+                    height:
+                        isLandscape(context) ? 2 * height * .8 : height * .8,
+                    child: SingleChildScrollView(
+                      child: Form(
+                        key: _formKey,
+                        child: SingleChildScrollView(
                           child: Column(
                             children: [
-                              Container(width: width*.9,height: height*.07,
-                                child: NetworkIndicatorWithoutImage(
-                                  child: Row(mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      customDescriptionTextText(context: context ,textColor: blueColor  ,
-                                          text: "Login" , fontWeight: FontWeight.bold , percentageOfHeight: .033)
-                                    ],),
-                                ),
-                              ),
-                              Center(
-                                child:Image.asset(AppImages.no_appointments_yet, height: isLandscape(context)
-                                    ? 2 * height * .25
-                                    : height * .25,),
-                              ),
-
-                              Container(height: isLandscape(context)
-                                  ? 2 * height * .7
-                                  : height * .7,
-                                child:Column(children: [
-
-                                  responsiveSizedBox(context: context , percentageOfHeight: .03),
-
-                                  EntryField(
-                                    controller: _phone,
-                                    hint: "Phone Number",
-                                    prefixIcon: Icons.phone_iphone,
-                                    color: Theme.of(context)
-                                        .scaffoldBackgroundColor,
-                                    validation: (value) {
-                                      if (value.isEmpty ||
-                                          value.length < 10) {
-                                        return 'please enter correct phone number';
-                                      }
-                                    },
-                                    onSaved: (value) {
-                                      phone = value;
-                                    },
-                                  ),
-                                  responsiveSizedBox(context: context , percentageOfHeight: .02),
-
-                                  EntryField(
-                                    controller: _password,
-                                    hint: "Password",
-                                    prefixIcon: Icons.lock_outline,
-                                    color: Theme.of(context)
-                                        .scaffoldBackgroundColor,
-                                    validation: (value) {
-                                      if (value.isEmpty ||
-                                          value.length < 6) {
-                                        return "please enter password greater than 6 character";
-                                      }
-                                    },
-                                    onSaved: (value) {
-                                      password = value;
-                                    },
-                                  ),
-
-                                  responsiveSizedBox(context: context , percentageOfHeight: .02),
-                                  if (state
-                                  is! MezaynLoginLoadingState) ...[
+                              SingleChildScrollView(
+                                child: Column(
+                                  children: [
                                     Container(
-
-                                        height: height * .08,
-
-                                        child: CustomButton(text:translator.translate("login"), onTapButton:()
-                                        {
-                                          print(
-                                              "add address tapped ");
-
-                                          DioHelper.postDataForAuth(
-                                            url: "//login",
-                                            data: {
-                                              "phone":_phone.text,
-                                              "password":_password.text},
-
-                                          ).then((value) async {
-                                            final response =
-                                                value.data;
-                                            print("response for register is ${value.data}");
-                                            if(value.statusCode == 200 && value.data["validation_error"] != null ){
-                                              ScaffoldMessenger.of(
-                                                  context)
-                                                  .showSnackBar(
-                                                  SnackBar(
-                                                    content: Text("The email has already been taken., The phone has already been taken"),
-                                                  ));
-                                            } else{
-                                              ScaffoldMessenger.of(
-                                                  context)
-                                                  .showSnackBar(
-                                                  SnackBar(
-                                                    content: Text("Welcome ${value.data["user"]["name"]} !"),
-                                                  ));
-                                              customPushNamedNavigation(context,value.data["user"]["type"] == "user"?  AppTab() :AppTabForBarber() );
-                                              print("user name is ${value.data["user"]["name"]}");
-                                              print("user email is ${value.data["user"]["email"]}");
-                                              print("user phone  is ${value.data["user"]["phone"]}");
-                                              CacheHelper.putStringData(key: "token", value: value.data["access_token"]);
-                                              CacheHelper.putStringData(key: "user_name", value: value.data["user"]["name"]);
-                                              CacheHelper.putStringData(key: "user_email", value: value.data["user"]["email"]);
-                                              CacheHelper.putStringData(key: "user_phone", value: value.data["user"]["phone"]);
-                                              CacheHelper.putStringData(key: "user_id", value: value.data["user"]["id"].toString());
-                                              CacheHelper.putStringData(key: "user_type", value: value.data["user"]["type"]);
-                                              CacheHelper.putStringData(key: "user_image", value: value.data["user"]["avatar"]);
-                                              await CacheHelper.init();
-                                              token  = CacheHelper.getStringData(key: 'token');
-
-
-                                            }
-
-                                          });
-                                        }
-                                        )
+                                      width: width * .9,
+                                      height: height * .07,
+                                      child: NetworkIndicatorWithoutImage(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            customDescriptionTextText(
+                                                context: context,
+                                                textColor: blueColor,
+                                                text: "Login",
+                                                fontWeight: FontWeight.bold,
+                                                percentageOfHeight: .033)
+                                          ],
+                                        ),
+                                      ),
                                     ),
-                                  ] else ...[
+                                    Center(
+                                      child: Image.asset(
+                                        AppImages.no_appointments_yet,
+                                        height: isLandscape(context)
+                                            ? 2 * height * .25
+                                            : height * .25,
+                                      ),
+                                    ),
                                     Container(
-                                      height: height * 0.1,
-                                      child: Center(child: spinKit),
+                                      height: isLandscape(context)
+                                          ? 2 * height * .7
+                                          : height * .7,
+                                      child: Column(
+                                        children: [
+                                          responsiveSizedBox(
+                                              context: context,
+                                              percentageOfHeight: .03),
+                                          EntryField(
+                                            controller: _phone,
+                                            hint: "Phone Number",
+                                            prefixIcon: Icons.phone_iphone,
+                                            color: Theme.of(context)
+                                                .scaffoldBackgroundColor,
+                                            validation: (value) {
+                                              if (value.isEmpty ||
+                                                  value.length < 10) {
+                                                return 'please enter correct phone number';
+                                              }
+                                            },
+                                            onSaved: (value) {
+                                              phone = value;
+                                            },
+                                          ),
+                                          responsiveSizedBox(
+                                              context: context,
+                                              percentageOfHeight: .02),
+                                          EntryField(
+                                            controller: _password,
+                                            hint: "Password",
+                                            prefixIcon: Icons.lock_outline,
+                                            color: Theme.of(context)
+                                                .scaffoldBackgroundColor,
+                                            validation: (value) {
+                                              if (value.isEmpty ||
+                                                  value.length < 6) {
+                                                return "please enter password greater than 6 character";
+                                              }
+                                            },
+                                            onSaved: (value) {
+                                              password = value;
+                                            },
+                                          ),
+                                          responsiveSizedBox(
+                                              context: context,
+                                              percentageOfHeight: .02),
+                                          if (state
+                                              is! MezaynLoginLoadingState) ...[
+                                            Container(
+                                                height: height * .08,
+                                                child: CustomButton(
+                                                    text: translator
+                                                        .translate("login"),
+                                                    onTapButton: () {
+                                                      print(
+                                                          "add address tapped ");
+
+                                                      DioHelper.postDataForAuth(
+                                                        url: "//login",
+                                                        data: {
+                                                          "phone": _phone.text,
+                                                          "password":
+                                                              _password.text
+                                                        },
+                                                      ).then((value) async {
+                                                        final response =
+                                                            value.data;
+                                                        print(
+                                                            "response for register is ${value.data}");
+                                                        if (value.statusCode ==
+                                                                200 &&
+                                                            value.data[
+                                                                    "validation_error"] !=
+                                                                null) {
+                                                          ScaffoldMessenger.of(
+                                                                  context)
+                                                              .showSnackBar(
+                                                                  SnackBar(
+                                                            content: Text(
+                                                                "The email has already been taken., The phone has already been taken"),
+                                                          ));
+                                                        } else {
+                                                          ScaffoldMessenger.of(
+                                                                  context)
+                                                              .showSnackBar(
+                                                                  SnackBar(
+                                                            content: Text(
+                                                                "Welcome ${value.data["user"]["name"]} !"),
+                                                          ));
+                                                          customPushNamedNavigation(
+                                                              context,
+                                                              value.data["user"]
+                                                                          [
+                                                                          "type"] ==
+                                                                      "user"
+                                                                  ? AppTab()
+                                                                  : AppTabForBarber());
+                                                          print(
+                                                              "user name is ${value.data["user"]["name"]}");
+                                                          print(
+                                                              "user email is ${value.data["user"]["email"]}");
+                                                          print(
+                                                              "user phone  is ${value.data["user"]["phone"]}");
+                                                          CacheHelper.putStringData(
+                                                              key: "token",
+                                                              value: value.data[
+                                                                  "access_token"]);
+                                                          CacheHelper.putStringData(
+                                                              key: "user_name",
+                                                              value: value.data[
+                                                                      "user"]
+                                                                  ["name"]);
+                                                          CacheHelper.putStringData(
+                                                              key: "user_email",
+                                                              value: value.data[
+                                                                      "user"]
+                                                                  ["email"]);
+                                                          CacheHelper.putStringData(
+                                                              key: "user_phone",
+                                                              value: value.data[
+                                                                      "user"]
+                                                                  ["phone"]);
+                                                          CacheHelper.putStringData(
+                                                              key: "user_id",
+                                                              value: value
+                                                                  .data["user"]
+                                                                      ["id"]
+                                                                  .toString());
+                                                          CacheHelper.putStringData(
+                                                              key: "user_type",
+                                                              value: value.data[
+                                                                      "user"]
+                                                                  ["type"]);
+                                                          CacheHelper.putStringData(
+                                                              key: "user_image",
+                                                              value: value.data[
+                                                                      "user"]
+                                                                  ["avatar"]);
+                                                          await CacheHelper
+                                                              .init();
+                                                          token = CacheHelper
+                                                              .getStringData(
+                                                                  key: 'token');
+                                                        }
+                                                      });
+                                                    })),
+                                          ] else ...[
+                                            Container(
+                                              height: height * 0.1,
+                                              child: Center(child: spinKit),
+                                            ),
+                                          ],
+                                          responsiveSizedBox(
+                                              context: context,
+                                              percentageOfHeight: .02),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                "Dont\'t have an account ?  ",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .subtitle1
+                                                    .copyWith(
+                                                        fontSize:
+                                                            height * .018),
+                                              ),
+                                              GestureDetector(
+                                                  onTap: () {
+                                                    customAnimatedPushNavigation(
+                                                        context,
+                                                        RegisterScreen());
+                                                  },
+                                                  child: Text(
+                                                    "Register",
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .subtitle1
+                                                        .copyWith(
+                                                            fontSize:
+                                                                height * .024),
+                                                  ))
+                                            ],
+                                          ),
+                                          responsiveSizedBox(
+                                              context: context,
+                                              percentageOfHeight: .005),
+                                          customDescriptionTextText(
+                                              context: context,
+                                              text: translator.translate("Or")),
+                                          responsiveSizedBox(
+                                              context: context,
+                                              percentageOfHeight: .005),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              GestureDetector(
+                                                  onTap: () {
+//                                          customAnimatedPushNavigation(context, AppTab());
+                                                  },
+                                                  child: Image.asset(
+                                                      AppIcons.facebook)),
+                                              SizedBox(
+                                                width: width * .03,
+                                              ),
+                                              Image.asset(AppIcons.google)
+                                            ],
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ],
-                                  responsiveSizedBox(context: context , percentageOfHeight: .02),
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "Dont\'t have an account ?  ",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1
-                                            .copyWith(
-                                            fontSize:
-                                            height * .018),
-                                      ),
-                                      GestureDetector(
-                                          onTap: () {
-                                            customAnimatedPushNavigation(context, RegisterScreen());
-                                          },
-                                          child: Text(
-                                            "Register",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .subtitle1
-                                                .copyWith(
-                                                fontSize:
-                                                height *
-                                                    .024),
-                                          ))
-                                    ],
-                                  ),
-                                  responsiveSizedBox(context: context , percentageOfHeight: .005),
-                                  customDescriptionTextText(context: context , text: translator.translate("Or")),
-                                  responsiveSizedBox(context: context , percentageOfHeight: .005),
-                                  Row(mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-
-                                      GestureDetector(
-                                        onTap:
-                                        (){
-//                                          customAnimatedPushNavigation(context, AppTab());
-                                        },
-                                          child: Image.asset(AppIcons.facebook)),
-                                      SizedBox(width: width*.03,),
-                                      Image.asset(AppIcons.google)
-
-                                    ],)
-
-                                ],),
-                              ),
+                                ),
+                              )
                             ],
                           ),
-                        )
-                      ],
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ),
-            )
+                  )
                 ],
               ),
             ),
@@ -279,3 +354,4 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+//--------------------------------- google sign in part

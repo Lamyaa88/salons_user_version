@@ -8,7 +8,7 @@ class CustomTextField extends StatefulWidget {
   final bool containsSuffixIcon;
   final bool  containsPrefixIcon;
   final String  prefixIconPath;
-  final String  suffixIconPath ;
+  final IconData  suffixIconPath ;
   final int maxLines ;
  final Function validation ;
   final Function onTapSuffixIcon ;
@@ -38,7 +38,7 @@ class CustomTextField extends StatefulWidget {
       this.isSearchTextField: false,
       this.controller,
       this.prefixIconPath :  AppIcons.search ,
-      this.suffixIconPath :  AppIcons.search });
+      this.suffixIconPath :  Icons.close});
 
   @override
   _CustomTextFieldState createState() => _CustomTextFieldState();
@@ -95,11 +95,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                           child: Center(
                               heightFactor: 10,
                               widthFactor: 10,
-                              child: Image.asset(
-                                widget.suffixIconPath ,
-                                height: 15,
-                                width: 15,
-                              )),
+                              child: Icon(widget.suffixIconPath)),
                         ),
                     ),
                 prefixIcon:  widget.containsPrefixIcon  == false

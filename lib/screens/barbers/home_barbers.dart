@@ -94,7 +94,7 @@ class _BarbersHomeScreenState extends State<BarbersHomeScreen> {
                                 Column(
                                   children: [
                                     Column(children: [
-                                      boldTitleRow(context: context , text: "Specifications") ,
+                                      boldTitleRow(context: context , text: "Explore") ,
                                       responsiveSizedBox(context: context, percentageOfHeight: .03) ,
                                       specificationListView(context : context),
                                       responsiveSizedBox(context: context, percentageOfHeight: .03) ,

@@ -44,7 +44,8 @@ categoriesListView({BuildContext context}){
                       return customSingleCategoryCard(
                         onTapCard: (){
                           {
-                            customAnimatedPushNavigation(context, SingleCategoryProductScreen());
+                            customAnimatedPushNavigation(context,
+                                SingleCategoryProductScreen(cubit.allCategoriesModel.data[index].nameEn));
                           }
                         },
                           context:

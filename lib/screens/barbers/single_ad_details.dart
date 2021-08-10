@@ -44,8 +44,8 @@ class _SingleAdDetailsScreenState
                           automaticallyImplyLeading: false,
                           leading: null,
                           expandedHeight: isLandscape(context)
-                              ? 2 * height * .5
-                              : height * .5,
+                              ? 2 * height * .6
+                              : height * .6,
                           backgroundColor: whiteColor,
                           floating: false,
                           pinned: false,

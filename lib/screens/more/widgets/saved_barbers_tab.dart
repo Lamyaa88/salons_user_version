@@ -32,7 +32,7 @@ savedBarbersTab({BuildContext context, Function onTapSingleSalon}) {
                       isLandscape(context) ? 2 * height  : height ,
                       width: width,
                       child:
-                      cubit.allSavedBarbersModel.data.length==0?
+                      cubit.allSavedBarbersModel.data.length == 0?
                       Center(child: customDescriptionTextText(context: context ,
                           percentageOfHeight: .025 , text: "You don\'t have any saved barbers ")):
 
@@ -51,7 +51,7 @@ savedBarbersTab({BuildContext context, Function onTapSingleSalon}) {
 
                                     SingleBarberDetailsScreen(barberId: cubit.allSavedBarbersModel.data[index].item.id.toString(),
                                       salonId: cubit.allSavedBarbersModel.data[index].item.salons[0].id,));},
-                            specificationList: cubit.allSavedBarbersModel.data[index].item.specifications,
+                            specificationList: cubit.allSavedBarbersModel.data[index].item.services,
                                 englishFees:cubit.allSavedBarbersModel.data[index].item.fees ,
                                 arabicFees:cubit.allSavedBarbersModel.data[index].item.fees,
                                 onTapDeleteFromSaved:    () {
@@ -84,9 +84,10 @@ savedBarbersTab({BuildContext context, Function onTapSingleSalon}) {
 
                                 } ,
                                 arabicName: cubit.allSavedBarbersModel.data[index].item.name,
-                                englishName: cubit.allSavedBarbersModel.data[index].item.name ,isCardForSaved: true,
+                                englishName: cubit.allSavedBarbersModel.data[index].item.name
+                                ,isCardForSaved: false,
                                 imagePath: cubit.allSavedBarbersModel.data[index].item.image ,
-                                specialitiesLength:cubit.allSavedBarbersModel.data[index].item.specifications.length ,
+                                specialitiesLength:cubit.allSavedBarbersModel.data[index].item.services.length ,
 
                               ) : SizedBox();
                           })),

@@ -1,19 +1,16 @@
-import 'package:almezyn/utils/file_export.dart';
-import 'package:almezyn/screens/products/widgets/all_products_grid_view.dart';
-class SingleCategoryProductScreen extends StatefulWidget {
-  final category ;
-  SingleCategoryProductScreen(this.category);
-  @override
-  _SingleCategoryProductScreenState createState() =>
-      _SingleCategoryProductScreenState(category);
-}
-class _SingleCategoryProductScreenState extends State<SingleCategoryProductScreen> {
-  final category ;
-  _SingleCategoryProductScreenState(this.category);
 
+import 'package:almezyn/app_cubits/salons/all_salons_cubit/all_salons_cubit.dart';
+import 'package:almezyn/screens/salons/widgets/all_salons_list_view.dart';
+import 'package:almezyn/utils/file_export.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class SingleSalonCategoryScreen  extends StatelessWidget {
+  final category ;
+  SingleSalonCategoryScreen({this.category});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: whiteColor,
+    return Scaffold(
+      backgroundColor: whiteColor,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -26,11 +23,16 @@ class _SingleCategoryProductScreenState extends State<SingleCategoryProductScree
                 SizedBox(width: width(context)*.05,) ,
                 customDescriptionTextText(context: context , text: category , fontWeight: FontWeight.bold , percentageOfHeight: .025, textColor: blackColor)
               ],),),
-            Container( height: height(context)*.9,
-                child: allProductsGridView(context : context )
-            ),
+            Container(height: height(context)*.9,
+
+              child: BlocProvider(
+                  create: (BuildContext context) => AllSalonsCubit()..getAllSalons(),
+                  child: allSalonsListView2(context: context)
+
+              ),),
           ],
         ),
-      ),);
+      ),
+    );
   }
 }

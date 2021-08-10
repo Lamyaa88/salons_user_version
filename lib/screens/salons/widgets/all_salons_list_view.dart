@@ -10,7 +10,6 @@ allSalonsListView2({BuildContext context, Function onTapSingleSalon}) {
   double height = MediaQuery.of(context).size.height;
   double width = MediaQuery.of(context).size.width;
   return Container(
-    height: height * .4,
     width: width,
     child: NetworkIndicatorWithoutImage(
       child: Container(
@@ -22,8 +21,6 @@ allSalonsListView2({BuildContext context, Function onTapSingleSalon}) {
               return Row(
                 children: [
                   Container(
-                      height:
-                          isLandscape(context) ? 2 * height * .4 : height * .4,
                       width: width,
                       child: ListView.builder(
                           physics: BouncingScrollPhysics(),

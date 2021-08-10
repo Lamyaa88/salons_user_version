@@ -9,8 +9,10 @@ import 'package:almezyn/screens/salons/widgets/offers_list_view.dart';
 import 'package:almezyn/utils/file_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:almezyn/screens/products/all_products_screen.dart';
 import 'package:almezyn/screens/barbers/widgets/ads_listview.dart';
+import 'package:almezyn/screens/products/all_products_categories_screen.dart';
+import 'package:almezyn/screens/salons/all_offers_screen.dart';
+import 'package:almezyn/screens/products/all_ads_screen.dart';
 class ProductsHomeScreen extends StatefulWidget {
   @override
   _ProductsHomeScreenState createState() => _ProductsHomeScreenState();
@@ -19,6 +21,7 @@ class _ProductsHomeScreenState extends State<ProductsHomeScreen> {
   String userName = "";
   String userImage = "";
   String searchInputs = "";
+   TextEditingController _searchController = TextEditingController();
   @override
   void initState() {
     // TODO: implement initState
@@ -96,7 +99,15 @@ class _ProductsHomeScreenState extends State<ProductsHomeScreen> {
                             responsiveSizedBox(
                                 context: context, percentageOfHeight: .02),
                             CustomTextField(
+                              controller: _searchController,
                               hint: "Search",
+                              containsSuffixIcon: searchInputs == "" ? false : true ,
+                              onTapSuffixIcon: (){
+                                setState(() {
+                                  searchInputs = "" ;
+                                  _searchController.clear() ;
+                                  FocusScope.of(context).unfocus();});
+                              },
                               onChange: (v) {
                                 setState(() {
                                   searchInputs = v;
@@ -113,9 +124,9 @@ class _ProductsHomeScreenState extends State<ProductsHomeScreen> {
                                           Column(
                                             children: [
                                               boldTitleRow(
-                                                onTapViewMore: (){customAnimatedPushNavigation(context, AllProductsScreen());},
+                                                onTapViewMore: (){customAnimatedPushNavigation(context, AllProductsCategoriesScreen());},
                                                   context: context,
-                                                  text: "Categories"),
+                                                  text: "Categories" ),
                                               responsiveSizedBox(
                                                   context: context,
                                                   percentageOfHeight: .03),
@@ -124,7 +135,7 @@ class _ProductsHomeScreenState extends State<ProductsHomeScreen> {
                                                   context: context,
                                                   percentageOfHeight: .03),
                                               boldTitleRow(
-                                                  onTapViewMore: (){customAnimatedPushNavigation(context, AllProductsScreen());},
+                                                  onTapViewMore: (){customAnimatedPushNavigation(context, AllOffersScreen());},
                                                   context: context,
                                                   text: "Offers"),
                                               offersListView(context : context ,) ,
@@ -132,7 +143,7 @@ class _ProductsHomeScreenState extends State<ProductsHomeScreen> {
                                                   context: context,
                                                   percentageOfHeight: .03),
                                               boldTitleRow(
-                                                  onTapViewMore: (){customAnimatedPushNavigation(context, AllProductsScreen());},
+                                                  onTapViewMore: (){customAnimatedPushNavigation(context, AllAdsScreen());},
                                                   context: context,
                                                   text: "Ads"),
                                               adsListView(context : context),

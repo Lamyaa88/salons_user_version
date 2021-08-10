@@ -130,8 +130,7 @@ class _SingleSalonDetailsScreenState extends State<SingleSalonDetailsScreen> {
                                                     child: ListView.builder(
 //                                         shrinkWrap: true,
                                                         physics: BouncingScrollPhysics(),
-                                                        itemCount: cubit.singleSalonModel.data.barbers.length ,
-
+                                                        itemCount:cubit.singleSalonModel.data.barbers.length ,
                                                         scrollDirection: Axis.vertical,
                                                         itemBuilder: (context, index) {
                                                           return customSingleBarberCardCard(
@@ -152,7 +151,7 @@ class _SingleSalonDetailsScreenState extends State<SingleSalonDetailsScreen> {
                                                                     cubit.singleSalonModel.data.barbers[index].id.toString(),salonId: cubit.singleSalonModel.data.id.toString(),));
                                                               },
                                                               imagePath:
-                                                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSqEFTzhbCzNO_A6omZxnhpm0RtNXvjqeXCg&usqp=CAU");
+                                                              "${cubit.singleSalonModel.data.barbers[index].image}");
                                                         }),
                                                   ),
                                                 ],

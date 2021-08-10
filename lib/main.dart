@@ -1,10 +1,24 @@
 import 'package:almezyn/screens/app_tab/app.dart';
 import 'package:almezyn/screens/auth/login_screen.dart';
 import 'package:almezyn/utils/file_export.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'network/cache_helper.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  FirebaseMessaging().configure(
+    onMessage: (Map<String, dynamic> message) async {
+      // HANDLE IT HERE
+      print("onMessage: $message");},
+    onLaunch: (Map<String, dynamic> message) async {
+      print("onLaunch: $message");
+    },
+    onResume: (Map<String, dynamic> message) async {
+      print("onResume: $message");
+    },
+  );
+  await Firebase.initializeApp();
   await translator.init(
     localeDefault: LocalizationDefaultType.asDefined,
     languagesList: <String>['en', 'ar'],

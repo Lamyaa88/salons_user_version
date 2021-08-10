@@ -16,7 +16,8 @@ customSingleProductCard(
       String arabicPrice: "",
       String englishPrice: "",
       int productQuantity : 1 ,
-      bool isShimmer: false}) {
+      bool isShimmer: false ,
+    bool isForSave : false }) {
   double height = MediaQuery.of(context).size.height;
   double width = MediaQuery.of(context).size.width;
   return GestureDetector( onTap: onTap,
@@ -81,23 +82,22 @@ customSingleProductCard(
             child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GestureDetector(onTap: onTapAdd,
-                  child: Neumorphic(
-                    child: Container( height: isLandscape(context)
+                  child:
+                     Container( height: isLandscape(context)
                         ? 2 * height * .06
                         : height * .06,
                       width: width * .12, decoration:
-                      BoxDecoration(color: blueColor),child: Center(child: Icon(Icons.add ,color: whiteColor,),),),
+                      BoxDecoration(color: blueColor.withOpacity(.3)),child: Center(child: Icon(Icons.shopping_cart ,color: whiteColor,),),),
                   ),
-                ),
+                isForSave == true?
                 GestureDetector(onTap: onTapDeleteFromSaved,
-                  child: Neumorphic(
                     child: Container( height: isLandscape(context)
                         ? 2 * height * .06
                         : height * .06,
                       width: width * .12, decoration:
-                      BoxDecoration(color: whiteColor),child: Center(child: Icon(Icons.delete_outline ,color: Colors.red,),),),
-                  ),
-                ),
+                      BoxDecoration(color: blueColor.withOpacity(.3)),child: Center(child: Icon(Icons.delete_outline ,color: whiteColor,),),),
+                  
+                ) : SizedBox(),
               ],
             )
           ),

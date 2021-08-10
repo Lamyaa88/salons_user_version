@@ -8,7 +8,7 @@ customDefaultShimmerListView({BuildContext context})
   return     Row(mainAxisAlignment: MainAxisAlignment.center,
     children: [
       Container(
-        height: height * .65,width: width*.9,
+        height: height ,width: width*.9,
         padding: EdgeInsets.only(
             top: height * .01),
         child: ListView.builder(
