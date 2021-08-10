@@ -10,21 +10,16 @@ class AllSavedBarbersCubit extends Cubit<AllSavedBarbersStates> {
   static AllSavedBarbersCubit get(context) => BlocProvider.of(context);
   AllSavedBarbersModel allSavedBarbersModel ;
   void getAllSavedBarbers() {
-    DioHelper.getAllData(
-      url: '/saved-barbers',
-      token: token,
-    ).then((value) {
-      final response = value.data;
-      final item = response['data'];
-      allSavedBarbersModel = AllSavedBarbersModel.fromJson(value.data);
-      print("status code for all barbers : ${value.statusCode}");
-      print("response for all savedBarbers : ${value.data}");
+    emit(AllSavedBarbersLoadingState());
+    DioHelper.getAllData(url: '/saved-barbers'  , token: token).then((value) async {
+      if (value.statusCode == 200) {
+        allSavedBarbersModel = AllSavedBarbersModel.fromJson(value.data);
+        print(" view barbers response is ${value.data}");
+      }
+      emit(AllSavedBarbersGetSuccessState());
     }).catchError((error) {
       print(error);
-
-      emit(
-        AllSavedBarbersGetErrorState(error: error.toString()),
-      );
+      emit(AllSavedBarbersGetErrorState(error: error.toString()));
     });
   }
 }

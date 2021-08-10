@@ -148,7 +148,10 @@ class _SingleSalonDetailsScreenState extends State<SingleSalonDetailsScreen> {
                                                                 customAnimatedPushNavigation(
                                                                     context,
                                                                     SingleBarberDetailsScreen( barberId:
-                                                                    cubit.singleSalonModel.data.barbers[index].id.toString(),salonId: cubit.singleSalonModel.data.id.toString(),));
+                                                                    cubit.singleSalonModel.data.barbers[index].id.toString()
+                                                                      ,salonId: cubit.singleSalonModel.data.id.toString(),salonName:cubit.singleSalonModel.data.nameEn ,
+                                                                     salonLat:  double.parse(cubit.singleSalonModel.data.location[0].lat),
+                                                                      salonLolong :  double.parse(cubit.singleSalonModel.data.location[0].lng),));
                                                               },
                                                               imagePath:
                                                               "${cubit.singleSalonModel.data.barbers[index].image}");

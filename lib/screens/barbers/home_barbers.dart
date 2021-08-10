@@ -1,5 +1,6 @@
 import 'package:almezyn/app_cubits/ads/all_ads_cubit/all_ads_cubit.dart';
 import 'package:almezyn/app_cubits/offers/all_offers_cubit/all_offers_cubit.dart';
+import 'package:almezyn/app_cubits/users/all_barbers_cubit/all_barbers_cubit.dart';
 import 'package:almezyn/screens/barbers/widgets/top_slider.dart';
 import 'package:almezyn/screens/barbers/widgets/ads_listview.dart';
 import 'package:almezyn/screens/barbers/widgets/search_barbers_part.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:almezyn/app_cubits/specifications/all_categories_cubit/all_specifications_cubit.dart';
 import 'package:almezyn/screens/salons/widgets/specifications_list_view.dart';
+import 'package:almezyn/screens/barbers/widgets/explore_list_view.dart';
 class BarbersHomeScreen extends StatefulWidget {
   @override
   _BarbersHomeScreenState createState() => _BarbersHomeScreenState();
@@ -57,6 +59,9 @@ class _BarbersHomeScreenState extends State<BarbersHomeScreen> {
                     body: Container(
                       child:MultiBlocProvider(
                         providers: [
+                          BlocProvider<AllBarbersCubit>(
+                            create: (BuildContext context) => AllBarbersCubit()..getAllBarbers(),
+                          ),
                           BlocProvider<AllSpecificationsCubit>(
                             create: (BuildContext context) => AllSpecificationsCubit()..getAllSpecifications(),
                           ),
@@ -96,7 +101,7 @@ class _BarbersHomeScreenState extends State<BarbersHomeScreen> {
                                     Column(children: [
                                       boldTitleRow(context: context , text: "Explore") ,
                                       responsiveSizedBox(context: context, percentageOfHeight: .03) ,
-                                      specificationListView(context : context),
+                                      exploreListView(context : context),
                                       responsiveSizedBox(context: context, percentageOfHeight: .03) ,
                                       boldTitleRow(context: context , text: "ads") ,
                                       responsiveSizedBox(context: context, percentageOfHeight: .03) ,

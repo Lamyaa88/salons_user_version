@@ -1,38 +1,37 @@
-import 'package:almezyn/Models/salons_models/single_salon_model.dart';
 import 'package:almezyn/app_cubits/users/single_barber_cubit/single_barber_cubit.dart';
 import 'package:almezyn/app_cubits/users/single_barber_cubit/single_barber_state.dart';
-import 'package:almezyn/screens/appointment/home_appointment.dart';
 import 'package:almezyn/screens/barbers/book_appointment_screen.dart';
-import 'package:almezyn/screens/salons/widgets/top_slider.dart';
+import 'package:almezyn/screens/salons/single_salon_details_screen.dart';
 import 'package:almezyn/utils/check_direction.dart';
 import 'package:almezyn/utils/constants.dart';
 import 'package:almezyn/utils/file_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:grouped_buttons/grouped_buttons.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
-import 'package:almezyn/screens/barbers/get_appointment_location_screen.dart';
-
 class SingleBarberDetailsScreen extends StatefulWidget {
   final barberId;
   final salonId;
-  SingleBarberDetailsScreen({this.barberId, this.salonId});
+  final salonName ;
+  final salonLat ;
+  final salonLolong ;
+  SingleBarberDetailsScreen({this.barberId :"", this.salonId :"" , this.salonName:"" , this.salonLat :"", this.salonLolong :""});
   @override
   _SingleBarberDetailsScreenState createState() =>
-      _SingleBarberDetailsScreenState(barberId, salonId);
+   _SingleBarberDetailsScreenState(barberId, salonId , salonName , salonLat , salonLolong );
 }
-
 class _SingleBarberDetailsScreenState extends State<SingleBarberDetailsScreen> {
   @override
   final barberId;
   final salonId;
+  final salonName ;
+  final salonLat ;
+  final salonLong ;
   var selectedItemList;
   List<String> _checked = ["A", "B"];
   bool borderColor = false;
   int selected  ;
   int sentToApi ;
 
-  _SingleBarberDetailsScreenState(this.barberId, this.salonId);
+  _SingleBarberDetailsScreenState(this.barberId, this.salonId , this.salonName , this.salonLat , this.salonLong);
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -97,13 +96,36 @@ class _SingleBarberDetailsScreenState extends State<SingleBarberDetailsScreen> {
                                           children: [
                                             customDescriptionTextText(
                                                 context: context,
-                                                text: translator
-                                                    .translate("Services :"),
+                                                text: checkDirection(
+                                                  cubit.singleBarberMap["data"]
+                                                  ["name"],
+                                                  cubit.singleBarberMap["data"]
+                                                  ["name"],
+                                                ),
                                                 maxLines: 10,
                                                 textAlign: TextAlign.start,
                                                 percentageOfHeight: .03,
                                                 fontWeight: FontWeight.bold,
                                                 textColor: Colors.black),
+                                          ],
+                                        ),
+                                        responsiveSizedBox(
+                                            context: context,
+                                            percentageOfHeight: .02),
+                                        Row(
+                                          children: [
+                                            GestureDetector(child: customDescriptionTextText(
+                                                context: context,
+                                                text: translator
+                                                    .translate(salonName),
+                                                maxLines: 10,
+                                                textAlign: TextAlign.start,
+                                                percentageOfHeight: .03,
+                                                fontWeight: FontWeight.bold,
+                                                textColor: blueColor),onTap: (){
+                                              customAnimatedPushNavigation(context,
+                                                  SingleSalonDetailsScreen(salonId: salonId , salonLat: salonLat,salonLong: salonLong,));
+                                            },)
                                           ],
                                         ),
                                         Container(

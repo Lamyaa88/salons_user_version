@@ -23,14 +23,7 @@ class SavedScreen extends StatelessWidget {
             providers: [
         BlocProvider<AllSavedSalonsCubit>(
         create: (BuildContext context) => AllSavedSalonsCubit()..getAllSavedSalons(),
-    ),
-              BlocProvider<AllSavedBarbersCubit>(
-                create: (BuildContext context) => AllSavedBarbersCubit()..getAllSavedBarbers(),
-              ),
-    BlocProvider<AllCategoriesCubit>(
-    create: (BuildContext context) =>
-    AllCategoriesCubit()..getAllCategories(),
-    ),],
+    )],
           child: DefaultTabController(
             length: 3,
             child: Scaffold(
@@ -50,17 +43,17 @@ class SavedScreen extends StatelessWidget {
                   labelStyle: Theme.of(context).textTheme.subtitle1,
                   indicatorColor: Colors.transparent,
                   tabs: [
-                    Tab(text:translator.translate("Salons")),
                     Tab(text:translator.translate("Barbers")),
+                    Tab(text:translator.translate("Salons")),
                     Tab(text:translator.translate("Products")),
                   ],
                 ),
               ),
               body:TabBarView(
                 children: [
-                  savedSalonsTab(context: context),
                   savedBarbersTab(context: context),
-                  savedProductsGridView(context: context)
+                  savedSalonsTab(context: context),
+                  savedProductsGridView(context: context) ,
                 ],
               )
             ),
