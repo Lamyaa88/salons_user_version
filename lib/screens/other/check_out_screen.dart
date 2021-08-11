@@ -61,8 +61,12 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                 arabicPrice: cubit.allCartProductsModel.cart.cartitems[index].product.price.toString(),
                                 englishPrice: cubit.allCartProductsModel.cart.cartitems[index].product.price.toString() ,
                                 englishName: cubit.allCartProductsModel.cart.cartitems[index].product.nameEn ,
-                              productQuantity: cubit.allCartProductsModel.cart.cartitems[index].product.quantity ,
+                              productQuantity: cubit.allCartProductsModel.cart.cartitems[index].qty ,
+                              itemTotal:
+                              ((double.parse(cubit.allCartProductsModel.cart.cartitems[index].qty.toString()))
+                                  *(double.parse(cubit.allCartProductsModel.cart.cartitems[index].price))).toString()
                               );
+
                           }),
                         ),
                         responsiveSizedBox(context : context , percentageOfHeight: .05),

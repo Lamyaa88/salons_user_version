@@ -12,6 +12,7 @@ customSingleItemWillBeOrderedCard(
       String englishDescription : "",
       String arabicDescription : "",
       String arabicPrice: "",
+      String itemTotal ,
       String englishPrice: "",
       String  productQuantity : "1",
       Function onTapIncrease ,
@@ -107,7 +108,7 @@ customSingleItemWillBeOrderedCard(
 
                                   customDescriptionTextText(
                                     percentageOfHeight: .02,
-                                    text: checkDirection("\$ 50" ,"\$ 50 "),
+                                    text: checkDirection("\$ ${englishPrice}" ,"\$ ${arabicPrice}"),
                                     textAlign: TextAlign.start,
                                     context: context,
                                     textColor: blackColor,
@@ -127,7 +128,7 @@ customSingleItemWillBeOrderedCard(
 
                                   customDescriptionTextText(
                                     percentageOfHeight: .02,
-                                    text: checkDirection(arabicPrice , englishPrice ),
+                                    text: checkDirection(itemTotal , itemTotal ),
                                     textAlign: TextAlign.start,
                                     context: context,
                                     textColor: blackColor,

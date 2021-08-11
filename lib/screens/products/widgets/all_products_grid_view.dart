@@ -61,15 +61,15 @@ allProductsGridView({BuildContext context}) {
                                     englishDescription:
                                         "Hair care product product ",
                                     englishPrice: cubit
-                                        .allProductsModel.data[index].price,
+                                        .allProductsModel.data[index].price.toString(),
+
                                     onTapCard: () {
                                       customAnimatedPushNavigation(context, SingleProductDetailsScreen(productId:cubit
-                                          .allProductsModel.data[index].id));
-                                    },
+                                          .allProductsModel.data[index].id));},
                                     arabicName: "منتج عناية بالشعر",
                                     arabicDescription: "منتج عناية بالشعر",
                                     arabicPrice: cubit
-                                        .allProductsModel.data[index].price);
+                                        .allProductsModel.data[index].price.toString());
                               }),
                     ),
                   );

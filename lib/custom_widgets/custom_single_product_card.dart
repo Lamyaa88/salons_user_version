@@ -66,7 +66,7 @@ customSingleProductCard(
 
                 ],),
                 Row(children: [
-                  customDescriptionTextText(context: context ,text: "\$ 50" ,textColor: whiteColor ,percentageOfHeight: .025,
+                  customDescriptionTextText(context: context ,text: checkDirection(arabicPrice , englishPrice) ,textColor: whiteColor ,percentageOfHeight: .025,
                       fontWeight: FontWeight.bold ,textAlign: TextAlign.start)
 
                 ],),

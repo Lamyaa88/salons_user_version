@@ -12,7 +12,7 @@ customSingleCartItemCard(
       String arabicDescription : "",
       String arabicPrice: "",
       String englishPrice: "",
-      int productQuantity : 1 ,
+      double  productQuantity : 1 ,
       Function onTapIncrease ,
       Function onTapDecrease ,
       Function onTapDeleteItem ,
@@ -167,7 +167,8 @@ customSingleCartItemCard(
 
                                       customDescriptionTextText(
                                           percentageOfHeight: .025,
-                                          text: checkDirection(productQuantity.toString(),productQuantity.toString()),
+                                          text: checkDirection(productQuantity.toInt()
+                                              .toString(),productQuantity.toInt().toString()),
                                           textAlign: TextAlign.start,
                                           context: context,
                                           textColor: blackColor,

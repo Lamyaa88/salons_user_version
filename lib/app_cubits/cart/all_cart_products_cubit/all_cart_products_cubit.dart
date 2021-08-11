@@ -11,7 +11,7 @@ class AllCartProductsCubit extends Cubit<AllCartProductsStates> {
   AllCartProductsModel allCartProductsModel ;
   int  statusCode  ;
   List cartItemsList = [];
-  Map AllCartProductsMap = {};
+  Map allCartProductsMap = {};
   void getAllCartProducts() {
     emit(AllCartProductsLoadingState());
     DioHelper.getAllData(url: '/show-my-cart' , token: token ).then((value) async {
@@ -22,8 +22,8 @@ class AllCartProductsCubit extends Cubit<AllCartProductsStates> {
       print("cart items  list is  ${cartItemsList}") ;
       allCartProductsModel  = AllCartProductsModel.fromJson(value.data);
       print("all cart products model is ${allCartProductsModel}");
-      AllCartProductsMap = value.data;
-      print("all cart products map is  ${AllCartProductsMap}");
+      allCartProductsMap = value.data;
+      print("all cart products map is  ${allCartProductsMap}");
 
       print(value.data.toString());
       if (value.statusCode == 200) {
