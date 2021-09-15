@@ -1,17 +1,11 @@
-import 'package:almezyn/Models/salons_models/single_salon_model.dart';
 import 'package:almezyn/app_cubits/users/single_barber_cubit/single_barber_cubit.dart';
 import 'package:almezyn/app_cubits/users/single_barber_cubit/single_barber_state.dart';
 import 'package:almezyn/screens/appointment/home_appointment.dart';
-import 'package:almezyn/screens/barbers/book_appointment_screen.dart';
-import 'package:almezyn/screens/salons/widgets/top_slider.dart';
 import 'package:almezyn/utils/check_direction.dart';
 import 'package:almezyn/utils/constants.dart';
 import 'package:almezyn/utils/file_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:grouped_buttons/grouped_buttons.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
-import 'package:almezyn/screens/barbers/get_appointment_location_screen.dart';
 
 class BookAppointmentScreen extends StatefulWidget {
   final barberId;
@@ -31,13 +25,12 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
   bool borderColorForService = false;
   bool borderColorForTime = false;
 
-  int selectedForService ;
-  int selectedForTime ;
+  int selectedForService;
+  int selectedForTime;
 
-  int sentServiceIdToApi ;
-  int sentTimeIdToApi ;
+  int sentServiceIdToApi;
+  int sentTimeIdToApi;
   TextEditingController _description = TextEditingController();
-
 
   _BookAppointmentScreenState(this.barberId, this.salonId);
   @override
@@ -48,7 +41,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
       color: whiteColor,
       child: BlocProvider(
         create: (BuildContext context) =>
-        SingleBarberCubit()..getSingleBarber(id: barberId),
+            SingleBarberCubit()..getSingleBarber(id: barberId),
         child: BlocConsumer<SingleBarberCubit, SingleBarberStates>(
           listener: (context, state) {},
           builder: (context, state) {
@@ -63,11 +56,12 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                     child: Column(
                       children: [
                         Container(
-                          height: height * .85,padding: EdgeInsets.only(right: width*.05 , left: width*.05),
+                          height: height * .85,
+                          padding: EdgeInsets.only(
+                              right: width * .05, left: width * .05),
                           child: SingleChildScrollView(
                             child: Column(
                               children: [
-
                                 responsiveSizedBox(
                                     context: context, percentageOfHeight: .05),
                                 Row(
@@ -81,49 +75,68 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                                         textColor: blackColor),
                                   ],
                                 ),
-                                Container(height: height*.35,child:
-                                ListView.builder(
+                                Container(
+                                  height: height * .35,
+                                  child: ListView.builder(
 //                                              shrinkWrap: true,
-                                    physics:
-                                    BouncingScrollPhysics(),
-                                    scrollDirection:
-                                    Axis.vertical,
-                                    itemCount:cubit.singleBarberMap["data"]["services"].length ,
-                                    itemBuilder:
-                                        (context, index ) {
-                                      return  Column(
-                                        children: [
-                                          responsiveSizedBox(context: context , percentageOfHeight: .05),
-                                          GestureDetector(onTap: (){
-                                            setState(() {
-                                              borderColorForService =!borderColorForService ;
-                                              print(index + 1);
-                                              selectedForService = (index) ;
-                                              print("selected is ${selectedForService} and index is ${index}");
-                                              sentServiceIdToApi = (index) ;
-                                              print("sent to api is ${sentServiceIdToApi}") ;});
-
-                                          },
-                                            child: Container(height: height*.1,
-                                                alignment: Alignment.center,
-                                                width: width*.9,
-                                                decoration:
-                                                BoxDecoration(border: Border.all(color: selectedForService == index ? blueColor : greyColor, width: 2)),
-                                                child: customDescriptionTextText(
-                                                    textColor: blackColor,
-                                                    fontWeight: FontWeight.bold,
-                                                    context:
-                                                    context,
-                                                    textAlign:
-                                                    TextAlign
-                                                        .start,
-                                                    text:checkDirection(cubit.singleBarberMap["data"]["services"][index]["name_en"]
-                                                        ,cubit.singleBarberMap["data"]["services"][index]["name_en"] )
-
-                                                )),
-                                          ),],
-                                      );
-                                    }),),
+                                      physics: BouncingScrollPhysics(),
+                                      scrollDirection: Axis.vertical,
+                                      itemCount: cubit
+                                          .singleBarberMap["data"]["services"]
+                                          .length,
+                                      itemBuilder: (context, index) {
+                                        return Column(
+                                          children: [
+                                            responsiveSizedBox(
+                                                context: context,
+                                                percentageOfHeight: .05),
+                                            GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  borderColorForService =
+                                                      !borderColorForService;
+                                                  print(index + 1);
+                                                  selectedForService = (index);
+                                                  print(
+                                                      "selected is ${selectedForService} and index is ${index}");
+                                                  sentServiceIdToApi = (index);
+                                                  print(
+                                                      "sent to api is ${sentServiceIdToApi}");
+                                                });
+                                              },
+                                              child: Container(
+                                                  height: height * .1,
+                                                  alignment: Alignment.center,
+                                                  width: width * .9,
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color:
+                                                              selectedForService ==
+                                                                      index
+                                                                  ? blueColor
+                                                                  : greyColor,
+                                                          width: 2)),
+                                                  child: customDescriptionTextText(
+                                                      textColor: blackColor,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      context: context,
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      text: checkDirection(
+                                                          cubit.singleBarberMap["data"]
+                                                                      ["services"]
+                                                                  [index]
+                                                              ["name_en"],
+                                                          cubit.singleBarberMap["data"]
+                                                                      ["services"]
+                                                                  [index]
+                                                              ["name_en"]))),
+                                            ),
+                                          ],
+                                        );
+                                      }),
+                                ),
                                 Row(
                                   children: [
                                     customDescriptionTextText(
@@ -135,184 +148,200 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                                         textColor: blackColor),
                                   ],
                                 ),
-                                Container(height: height*.35,
-                                  child:
-                                ListView.builder(
+                                Container(
+                                  height: height * .35,
+                                  child: ListView.builder(
 //                                              shrinkWrap: true,
-                                    physics:
-                                    BouncingScrollPhysics(),
-                                    scrollDirection:
-                                    Axis.vertical,
-                                    itemCount:cubit.singleBarberMap["data"]["availability"].length ,
-                                    itemBuilder:
-                                        (context, index ) {
-                                      return  Column(
-                                        children: [
-                                          responsiveSizedBox(context: context , percentageOfHeight: .05),
-                                          GestureDetector(onTap: (){
-                                            setState(() {
-                                              borderColorForTime =!borderColorForTime ;
-                                              print(index + 1);
-                                              selectedForTime = (index) ;
-                                              print("selected is ${selectedForTime} and index is ${index}");
-                                              sentTimeIdToApi = (index) ;
-                                              print("sent to api is ${sentTimeIdToApi}") ;});
-
-                                          },
-                                            child: Container(
-                                                alignment: Alignment.center,
-                                                width: width*.9,
-                                                decoration:
-                                                BoxDecoration(border: Border.all(color: selectedForTime == index ? blueColor : greyColor, width: 2)),
-                                                child: Column(
-                                                  children: [
-                                                    responsiveSizedBox(
-                                                        context: context,
-                                                        percentageOfHeight:
-                                                        .03),
-
-                                                     Container(
+                                      physics: BouncingScrollPhysics(),
+                                      scrollDirection: Axis.vertical,
+                                      itemCount: cubit
+                                          .singleBarberMap["data"]
+                                              ["availability"]
+                                          .length,
+                                      itemBuilder: (context, index) {
+                                        return Column(
+                                          children: [
+                                            responsiveSizedBox(
+                                                context: context,
+                                                percentageOfHeight: .05),
+                                            GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  borderColorForTime =
+                                                      !borderColorForTime;
+                                                  print(index + 1);
+                                                  selectedForTime = (index);
+                                                  print(
+                                                      "selected is ${selectedForTime} and index is ${index}");
+                                                  sentTimeIdToApi = (index);
+                                                  print(
+                                                      "sent to api is ${sentTimeIdToApi}");
+                                                });
+                                              },
+                                              child: Container(
+                                                  alignment: Alignment.center,
+                                                  width: width * .9,
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color:
+                                                              selectedForTime ==
+                                                                      index
+                                                                  ? blueColor
+                                                                  : greyColor,
+                                                          width: 2)),
+                                                  child: Column(
+                                                    children: [
+                                                      responsiveSizedBox(
+                                                          context: context,
+                                                          percentageOfHeight:
+                                                              .03),
+                                                      Container(
                                                         padding:
-                                                        EdgeInsets.only(right: width*.02 , left: width*.02),
+                                                            EdgeInsets.only(
+                                                                right:
+                                                                    width * .02,
+                                                                left: width *
+                                                                    .02),
                                                         width: width * .9,
                                                         decoration: BoxDecoration(
                                                             color: whiteColor,
                                                             borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                8)),
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8)),
                                                         child: Column(
                                                           children: [
                                                             responsiveSizedBox(
                                                                 context:
-                                                                context,
+                                                                    context,
                                                                 percentageOfHeight:
-                                                                .02),
+                                                                    .02),
                                                             Row(
                                                               children: [
                                                                 customDescriptionTextText(
                                                                     context:
-                                                                    context,
+                                                                        context,
                                                                     text:
-                                                                    "date : ",
+                                                                        "date : ",
                                                                     fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
+                                                                        FontWeight
+                                                                            .bold),
                                                                 SizedBox(
                                                                   width: 10,
                                                                 ),
                                                                 customDescriptionTextText(
                                                                     context:
-                                                                    context,
+                                                                        context,
                                                                     text: cubit.singleBarberMap["data"]["availability"][index]["date"] ==
-                                                                        null
+                                                                            null
                                                                         ? ""
                                                                         : cubit.singleBarberMap["data"]["availability"][index]
-                                                                    [
-                                                                    "date"]),
+                                                                            [
+                                                                            "date"]),
                                                               ],
                                                             ),
                                                             responsiveSizedBox(
                                                                 context:
-                                                                context,
+                                                                    context,
                                                                 percentageOfHeight:
-                                                                .02),
+                                                                    .02),
                                                             Row(
                                                               children: [
                                                                 customDescriptionTextText(
                                                                     context:
-                                                                    context,
+                                                                        context,
                                                                     text:
-                                                                    "day : ",
+                                                                        "day : ",
                                                                     fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
+                                                                        FontWeight
+                                                                            .bold),
                                                                 SizedBox(
                                                                   width: 10,
                                                                 ),
                                                                 customDescriptionTextText(
                                                                     context:
-                                                                    context,
+                                                                        context,
                                                                     text: cubit.singleBarberMap["data"]["availability"][index]["day"] ==
-                                                                        null
+                                                                            null
                                                                         ? ""
                                                                         : cubit.singleBarberMap["data"]["availability"][index]
-                                                                    [
-                                                                    "day"]),
+                                                                            [
+                                                                            "day"]),
                                                               ],
                                                             ),
                                                             responsiveSizedBox(
                                                                 context:
-                                                                context,
+                                                                    context,
                                                                 percentageOfHeight:
-                                                                .02),
+                                                                    .02),
                                                             Row(
                                                               children: [
                                                                 customDescriptionTextText(
                                                                     context:
-                                                                    context,
+                                                                        context,
                                                                     text:
-                                                                    "from : ",
+                                                                        "from : ",
                                                                     fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
+                                                                        FontWeight
+                                                                            .bold),
                                                                 SizedBox(
                                                                   width: 10,
                                                                 ),
                                                                 customDescriptionTextText(
                                                                     context:
-                                                                    context,
+                                                                        context,
                                                                     text: cubit.singleBarberMap["data"]["availability"][index]["start_time"] ==
-                                                                        null
+                                                                            null
                                                                         ? ""
                                                                         : cubit.singleBarberMap["data"]["availability"][index]
-                                                                    [
-                                                                    "start_time"]),
+                                                                            [
+                                                                            "start_time"]),
                                                               ],
                                                             ),
                                                             responsiveSizedBox(
                                                                 context:
-                                                                context,
+                                                                    context,
                                                                 percentageOfHeight:
-                                                                .02),
+                                                                    .02),
                                                             Row(
                                                               children: [
                                                                 customDescriptionTextText(
                                                                     context:
-                                                                    context,
+                                                                        context,
                                                                     text:
-                                                                    "to : ",
+                                                                        "to : ",
                                                                     fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
+                                                                        FontWeight
+                                                                            .bold),
                                                                 SizedBox(
                                                                   width: 10,
                                                                 ),
                                                                 customDescriptionTextText(
                                                                     context:
-                                                                    context,
+                                                                        context,
                                                                     text: cubit.singleBarberMap["data"]["availability"][index]["end_date"] ==
-                                                                        null
+                                                                            null
                                                                         ? ""
                                                                         : cubit.singleBarberMap["data"]["availability"][index]
-                                                                    [
-                                                                    "end_date"]),
+                                                                            [
+                                                                            "end_date"]),
                                                               ],
                                                             ),
                                                             responsiveSizedBox(
                                                                 context:
-                                                                context,
+                                                                    context,
                                                                 percentageOfHeight:
-                                                                .02),
+                                                                    .02),
                                                           ],
                                                         ),
                                                       ),
-
-                                                  ],
-                                                )),
-                                          ),],
-                                      );
-                                    }),),
+                                                    ],
+                                                  )),
+                                            ),
+                                          ],
+                                        );
+                                      }),
+                                ),
                                 responsiveSizedBox(
                                     context: context, percentageOfHeight: .01),
                                 Row(
@@ -328,10 +357,12 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                                 ),
                                 responsiveSizedBox(
                                     context: context, percentageOfHeight: .01),
-                                CustomTextField(hint: "write your notes ", controller: _description,) ,
+                                CustomTextField(
+                                  hint: "write your notes ",
+                                  controller: _description,
+                                ),
                                 responsiveSizedBox(
                                     context: context, percentageOfHeight: .01),
-
                               ],
                             ),
                           ),
@@ -344,30 +375,35 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                             DioHelper.postData(
                               url: "/book-appointment",
                               data: {
-                                "appointment_date" :  cubit.singleBarberMap["data"]["availability"][sentTimeIdToApi]["date"] ,
-                                "appointment_time" :cubit.singleBarberMap["data"]["availability"][sentTimeIdToApi]["start_time"]  ,
-                                "description":_description.text ,
-                                "barber_id":barberId,
-                                "salon_id":salonId,
-                                "speciality_ids":cubit.singleBarberMap["data"]["services"][sentServiceIdToApi]["id"],
-                                "day":cubit.singleBarberMap["data"]["availability"][sentTimeIdToApi]["day"] ,
-                                "address_id" :""},
+                                "appointment_date": cubit
+                                        .singleBarberMap["data"]["availability"]
+                                    [sentTimeIdToApi]["date"],
+                                "appointment_time": cubit
+                                        .singleBarberMap["data"]["availability"]
+                                    [sentTimeIdToApi]["start_time"],
+                                "description": _description.text,
+                                "barber_id": barberId,
+                                "salon_id": salonId,
+                                "speciality_ids": cubit.singleBarberMap["data"]
+                                    ["services"][sentServiceIdToApi]["id"],
+                                "day": cubit.singleBarberMap["data"]
+                                    ["availability"][sentTimeIdToApi]["day"],
+                                "address_id": ""
+                              },
                               token: token,
                             ).then(
-                                  (value) {
+                              (value) {
                                 print(value);
-                                if(value.statusCode == 200) {
-                                  ScaffoldMessenger.of(
-                                      context)
-                                      .showSnackBar(
-                                      SnackBar(
-                                        content: Text(value.data["message"]),
-                                      ));
-                                  customPushNamedNavigation(context, AppointmentsHomeScreen());
+                                if (value.statusCode == 200) {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
+                                    content: Text(value.data["message"]),
+                                  ));
+                                  customPushNamedNavigation(
+                                      context, AppointmentsHomeScreen());
                                 }
                               },
                             );
-
                           },
                         )
                       ],
@@ -383,14 +419,12 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
     );
   }
 
-
-
   Future showCustomAlertDialog(
       {BuildContext context,
-        String alertTitle,
-        String alertSubtitle,
-        Function onTapHome,
-        Function onTapSalon}) {
+      String alertTitle,
+      String alertSubtitle,
+      Function onTapHome,
+      Function onTapSalon}) {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
@@ -428,7 +462,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                 height(context) * .02,
               ),
               child:
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 GestureDetector(
                     child: customDescriptionTextText(
                         context: context,
@@ -456,4 +490,3 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
     );
   }
 }
-

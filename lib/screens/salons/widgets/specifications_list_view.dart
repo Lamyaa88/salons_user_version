@@ -2,7 +2,6 @@ import 'package:almezyn/utils/file_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:almezyn/app_cubits/specifications/all_categories_cubit/all_specifications_cubit.dart';
 import 'package:almezyn/app_cubits/specifications/all_categories_cubit/all_specificationss_state.dart';
-import 'package:almezyn/screens/barbers/single_barber_category_screen.dart';
 import 'package:almezyn/screens/salons/single_salon_category_screen.dart';
 specificationListView({BuildContext context}){
   double height = MediaQuery.of(context).size.height;

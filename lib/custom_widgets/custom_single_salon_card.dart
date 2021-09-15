@@ -137,85 +137,83 @@ customSingleSalonCard(
                                   responsiveSizedBox(
                                       context: context,
                                       percentageOfHeight: .02),
-                                  Container(
-                                    width: width *.57,
-                                    height: isLandscape(
-                                        context)
-                                        ? 2 * height * .08
-                                        : height * .08,
-                                    child: ListView.builder(
-                                        shrinkWrap: true,
-                                        physics:
-                                        BouncingScrollPhysics(),
-                                        scrollDirection:
-                                        Axis.horizontal,
-                                        itemCount: specialitiesLength,
-                                        itemBuilder:
-                                            (context, subIndex ) {
-                                          return Row(
-                                            children: [
-                                              SizedBox(width: width*.02,),
-                                              Neumorphic(
-                                                child: Container(
-                                                  child: Row(
-                                                    children: [
-
-                                                       Container(
-                                                          decoration: BoxDecoration(
-                                                            image: DecorationImage(
-
-                                                              image: NetworkImage(
-                                                                  imagePath == null
-                                                                      ? "https://encrypted-tbn0.gscTJxMQ1Hx-kAq3vC1UmrjBHBdT0eU5Yci4x6m-XWv3QVpaUOd5QFmwNyTiRf09N1OmBAvQ&usqp=CAU"
-                                                                      :"${baseImageUrl}${specialitiesList[subIndex].image}"),
-                                                              fit: BoxFit.cover,
-                                                            ),
-                                                            color: backGroundColor,
-                                                            borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    0)),
-                                                          ),
-                                                          height: isLandscape(context)
-                                                              ? 2 * height * .05
-                                                              : height * .05,
-                                                          width: width * .1,
-                                                        ),
-
-                                                     Container(
-                                                        child: Container(
-                                                            width: width * .3,
-                                                            height: isLandscape(
-                                                                context)
-                                                                ? 2 * height * .05
-                                                                : height * .05,
-                                                            decoration: BoxDecoration(
-                                                                color: whiteColor,
-                                                                borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                    0)),
-                                                            child: Center(
-                                                              child: customDescriptionTextText(
-                                                                context:
-                                                                context,
-                                                                textAlign:
-                                                                TextAlign
-                                                                    .start,
-                                                                text:
-                                                      specialitiesList == null ?checkDirection("قص الشعر", "Hair Cut") :
-
-                                                                checkDirection(specialitiesList[subIndex].nameAr ,specialitiesList[subIndex].nameEn),),
-                                                            )),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          );
-                                        }),
-                                  ),
+//                                  Container(
+//                                    width: width *.57,
+//                                    height: isLandscape(
+//                                        context)
+//                                        ? 2 * height * .08
+//                                        : height * .08,
+//                                    child: ListView.builder(
+//                                        shrinkWrap: true,
+//                                        physics:
+//                                        BouncingScrollPhysics(),
+//                                        scrollDirection:
+//                                        Axis.horizontal,
+//                                        itemCount: specialitiesLength,
+//                                        itemBuilder:
+//                                            (context, subIndex ) {
+//                                          return Row(
+//                                            children: [
+//                                              SizedBox(width: width*.02,),
+//                                              Neumorphic(
+//                                                child: Container(
+//                                                  child: Row(
+//                                                    children: [
+//
+//                                                       Container(
+//                                                          decoration: BoxDecoration(
+//                                                            image: DecorationImage(
+//
+//                                                              image: NetworkImage(
+//                                                                  imagePath == null
+//                                                                      ? "https://encrypted-tbn0.gscTJxMQ1Hx-kAq3vC1UmrjBHBdT0eU5Yci4x6m-XWv3QVpaUOd5QFmwNyTiRf09N1OmBAvQ&usqp=CAU"
+//                                                                      :"${baseImageUrl}${specialitiesList[subIndex].image}"),
+//                                                              fit: BoxFit.cover,
+//                                                            ),
+//                                                            color: backGroundColor,
+//                                                            borderRadius:
+//                                                            BorderRadius.all(
+//                                                                Radius.circular(
+//                                                                    0)),
+//                                                          ),
+//                                                          height: isLandscape(context)
+//                                                              ? 2 * height * .05
+//                                                              : height * .05,
+//                                                          width: width * .1,
+//                                                        ),
+//
+////                                                     Container(
+////                                                        child: Container(
+////                                                            width: width * .3,
+////                                                            height: isLandscape(
+////                                                                context)
+////                                                                ? 2 * height * .05
+////                                                                : height * .05,
+////                                                            decoration: BoxDecoration(
+////                                                                color: whiteColor,
+////                                                                borderRadius:
+////                                                                BorderRadius
+////                                                                    .circular(
+////                                                                    0)),
+////                                                            child: Center(
+////                                                              child: customDescriptionTextText(
+////                                                                context:
+////                                                                context,
+////                                                                textAlign:
+////                                                                TextAlign
+////                                                                    .start,
+////                                                                text:
+////                                                      checkDirection(specialitiesList[subIndex].nameAr ,specialitiesList[subIndex].nameEn)??""),
+////                                                            )),
+////                                                      ),
+//                                                    ],
+//                                                  ),
+//                                                ),
+//                                              ),
+//                                            ],
+//                                          );
+//                                        }),
+//                                  ),
                                 ],
                               ),
                             ),

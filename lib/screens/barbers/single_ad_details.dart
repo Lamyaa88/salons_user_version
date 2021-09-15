@@ -1,11 +1,9 @@
 import 'package:almezyn/app_cubits/ads/single_ad_cubit/single_ad_cubit.dart';
-import 'package:almezyn/app_cubits/offers/single_offer_cubit/single_offer_cubit.dart';
 import 'package:almezyn/app_cubits/offers/single_offer_cubit/single_offer_state.dart';
 import 'package:almezyn/utils/check_direction.dart';
 import 'package:almezyn/utils/constants.dart';
 import 'package:almezyn/utils/file_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 class SingleAdDetailsScreen extends StatefulWidget {
   final offerId;

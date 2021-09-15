@@ -12,6 +12,7 @@ import 'package:almezyn/app_cubits/specifications/all_categories_cubit/all_speci
 import 'package:almezyn/screens/salons/widgets/specifications_list_view.dart';
 import 'package:almezyn/screens/salons/salon_all_specifications_screen.dart';
 import 'package:almezyn/screens/salons/all_offers_screen.dart';
+
 class SalonsHomeScreen extends StatefulWidget {
   @override
   _SalonsHomeScreenState createState() => _SalonsHomeScreenState();
@@ -40,11 +41,11 @@ class _SalonsHomeScreenState extends State<SalonsHomeScreen> {
                           (BuildContext context, bool innerBoxIsScrolled) {
                         return <Widget>[
                           SliverAppBar(
-
                             expandedHeight: isLandscape(context)
                                 ? 2 * height * .4
                                 : height * .4,
-                            backgroundColor: whiteColor,forceElevated: false,
+                            backgroundColor: whiteColor,
+                            forceElevated: false,
                             elevation: 0,
                             foregroundColor: Colors.white,
                             flexibleSpace: FlexibleSpaceBar(
@@ -99,13 +100,13 @@ class _SalonsHomeScreenState extends State<SalonsHomeScreen> {
                                   context: context, percentageOfHeight: .02),
                               CustomTextField(
                                 controller: _searchController,
-                                containsSuffixIcon: searchInputs == "" ? false : true ,
-                                onTapSuffixIcon: (){
+                                containsSuffixIcon:
+                                    searchInputs == "" ? false : true,
+                                onTapSuffixIcon: () {
                                   setState(() {
-                                    searchInputs = "" ;
-                                     _searchController.clear() ;
-                                   FocusScope.of(context).unfocus();
-
+                                    searchInputs = "";
+                                    _searchController.clear();
+                                    FocusScope.of(context).unfocus();
                                   });
                                 },
                                 hint: "Search",
@@ -126,8 +127,12 @@ class _SalonsHomeScreenState extends State<SalonsHomeScreen> {
                                               children: [
                                                 boldTitleRow(
                                                     context: context,
-                                                    text: "Specifications" ,
-                                                    onTapViewMore: (){customAnimatedPushNavigation(context, AllSalonSpecifications());}),
+                                                    text: "Specifications",
+                                                    onTapViewMore: () {
+                                                      customAnimatedPushNavigation(
+                                                          context,
+                                                          AllSalonSpecifications());
+                                                    }),
                                                 responsiveSizedBox(
                                                     context: context,
                                                     percentageOfHeight: .03),
@@ -138,9 +143,12 @@ class _SalonsHomeScreenState extends State<SalonsHomeScreen> {
                                                     percentageOfHeight: .03),
                                                 boldTitleRow(
                                                     context: context,
-                                                    text: "Offers" , onTapViewMore: (){
-                                                      customAnimatedPushNavigation(context, AllOffersScreen());
-                                                }),
+                                                    text: "Offers",
+                                                    onTapViewMore: () {
+                                                      customAnimatedPushNavigation(
+                                                          context,
+                                                          AllOffersScreen());
+                                                    }),
                                                 responsiveSizedBox(
                                                     context: context,
                                                     percentageOfHeight: .03),
@@ -167,7 +175,8 @@ class _SalonsHomeScreenState extends State<SalonsHomeScreen> {
                                   }),
                               responsiveSizedBox(
                                   context: context, percentageOfHeight: .03),
-                              Container(height: height*.5,
+                              Container(
+                                height: height * .5,
                                 child: allSalonsListView2(context: context),
                               ),
                               responsiveSizedBox(

@@ -46,8 +46,8 @@ class _SingleSalonDetailsScreenState extends State<SingleSalonDetailsScreen> {
     getSalonAddress(salonLat,salonLong) ;
     super.initState();
   }
-  getSalonAddress(double pickedLat , double pickedLong) async {
-    placeMarks = await placemarkFromCoordinates(pickedLat ,pickedLong);
+  getSalonAddress(double pickedLat , double pickedLong ) async {
+    placeMarks = await placemarkFromCoordinates(pickedLat ,pickedLong );
     print(placeMarks[0].street);
     setState(() {
       userPickedLocation  = "name: ${placeMarks[0].name} \n Street : ${placeMarks[0].street}"

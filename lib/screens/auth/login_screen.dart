@@ -11,7 +11,6 @@ import 'package:almezyn/network/end_point.dart';
 import 'package:almezyn/screens/app_tab/app.dart';
 import 'package:almezyn/screens/auth/Login/cubit/cubit_login.dart';
 import 'package:almezyn/screens/auth/Login/cubit/state_login.dart';
-import 'package:almezyn/barbers_app/screens/app_tab/appForBarber.dart';
 import 'package:almezyn/screens/auth/singn_in_screen.dart';
 import 'package:almezyn/utils/colors.dart';
 import 'package:almezyn/utils/constants.dart';
@@ -219,7 +218,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                                           "type"] ==
                                                                       "user"
                                                                   ? AppTab()
-                                                                  : AppTabForBarber());
+                                                                  : AppTab());
                                                           print(
                                                               "user name is ${value.data["user"]["name"]}");
                                                           print(

@@ -1,6 +1,4 @@
-import 'package:almezyn/screens/more/widgets/single_account_button.dart';
 import 'package:almezyn/utils/file_export.dart';
-import 'package:almezyn/screens/more/widgets/user_data.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 class ChangeLanguageScreen extends StatelessWidget {
   @override

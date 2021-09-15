@@ -1,11 +1,7 @@
 import 'dart:async';
-import 'dart:collection';
 import 'package:almezyn/screens/more/orders_screen.dart';
-import 'package:almezyn/screens/salons/single_salon_location_screen.dart';
 import 'package:almezyn/utils/check_direction.dart';
 import 'package:almezyn/utils/file_export.dart';
-import 'package:almezyn/screens/other/payment_screen.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'get_user_current_location_screen.dart';
 import 'package:location/location.dart';

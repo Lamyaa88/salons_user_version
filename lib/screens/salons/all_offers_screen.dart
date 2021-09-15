@@ -1,10 +1,6 @@
 
 import 'package:almezyn/app_cubits/offers/all_offers_cubit/all_offers_cubit.dart';
-import 'package:almezyn/app_cubits/offers/all_offers_cubit/all_offers_cubit.dart';
-import 'package:almezyn/app_cubits/offers/all_offers_cubit/all_offers_cubit.dart';
 import 'package:almezyn/app_cubits/offers/all_offers_cubit/all_offers_state.dart';
-import 'package:almezyn/app_cubits/specifications/all_categories_cubit/all_specifications_cubit.dart';
-import 'package:almezyn/app_cubits/specifications/all_categories_cubit/all_specificationss_state.dart';
 import 'package:almezyn/screens/products/single_offer_details.dart';
 import 'package:almezyn/utils/check_direction.dart';
 import 'package:almezyn/utils/constants.dart';

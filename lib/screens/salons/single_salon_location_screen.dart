@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:collection';
-import 'package:almezyn/screens/salons/single_salon_details.dart';
 import 'package:almezyn/utils/file_export.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 class SingleSalonLocationScreen extends StatefulWidget {

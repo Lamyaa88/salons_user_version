@@ -1,7 +1,6 @@
 import 'package:almezyn/utils/constants.dart';
 import 'package:almezyn/utils/file_export.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
-import 'package:almezyn/screens/other/chats/chat_screen.dart';
 
 userNameAndImageTopPart({BuildContext context , String username , String imagePath}){
   double height = MediaQuery.of(context).size.height;

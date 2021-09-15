@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:almezyn/screens/splash/widgets/splash_build_body.dart';
 import 'package:almezyn/utils/file_export.dart';
-import 'package:almezyn/utils/file_export.dart';
 
 class SecondSplashScreen extends StatefulWidget {
   @override

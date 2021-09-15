@@ -21,7 +21,6 @@ import 'package:toast/toast.dart';
 import 'package:almezyn/custom_widgets/entry_field.dart';
 import 'Register/cubit/cubit2/cubit_register.dart';
 import 'Register/cubit/cubit2/register_states.dart';
-import 'package:almezyn/barbers_app/screens/app_tab/appForBarber.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -31,7 +30,7 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController _name = TextEditingController();
   TextEditingController _email = TextEditingController();
-  TextEditingController _phone= TextEditingController();
+  TextEditingController _phone = TextEditingController();
   TextEditingController _password = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -77,194 +76,228 @@ class _RegisterScreenState extends State<RegisterScreen> {
               paddingPercentageForBody: 0.0,
               columnOfWidgets: Column(
                 children: [
-                  Container(height: isLandscape(context)
-                      ? 2 * height*.8
-                      : height*.8 ,
+                  Container(
+                    height:
+                        isLandscape(context) ? 2 * height * .8 : height * .8,
                     child: SingleChildScrollView(
-                      child:  Form(
+                      child: Form(
                         key: _formKey,
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
-
-                              responsiveSizedBox(context: context , percentageOfHeight: .01),
-                              Container(width: width*.9,height: height*.07,
+                              responsiveSizedBox(
+                                  context: context, percentageOfHeight: .01),
+                              Container(
+                                width: width * .9,
+                                height: height * .07,
                                 child: NetworkIndicatorWithoutImage(
-                                  child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      customDescriptionTextText(context: context ,textColor: blueColor  ,
-                                          text: "Login" , fontWeight: FontWeight.bold , percentageOfHeight: .033)
-                                    ],),
+                                      customDescriptionTextText(
+                                          context: context,
+                                          textColor: blueColor,
+                                          text: "Login",
+                                          fontWeight: FontWeight.bold,
+                                          percentageOfHeight: .033)
+                                    ],
+                                  ),
                                 ),
                               ),
-                              responsiveSizedBox(context: context , percentageOfHeight: .02),
+                              responsiveSizedBox(
+                                  context: context, percentageOfHeight: .02),
                               EntryField(
                                 controller: _name,
                                 hint: "Name",
                                 prefixIcon: Icons.edit_outlined,
-                                color: Theme.of(context)
-                                    .scaffoldBackgroundColor,
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor,
                                 validation: (value) {
-                                  if (value.isEmpty ||
-                                      value.length < 1) {
+                                  if (value.isEmpty || value.length < 1) {
                                     return 'please enter correct phone number';
                                   }
                                 },
                               ),
-                              responsiveSizedBox(context: context , percentageOfHeight: .02),
+                              responsiveSizedBox(
+                                  context: context, percentageOfHeight: .02),
                               EntryField(
                                 controller: _email,
                                 hint: "Email",
                                 prefixIcon: Icons.email_outlined,
-                                color: Theme.of(context)
-                                    .scaffoldBackgroundColor,
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor,
                                 validation: (value) {
-                                  if (value.isEmpty ||
-                                      value.length < 10) {
+                                  if (value.isEmpty || value.length < 10) {
                                     return 'please enter correct name';
                                   }
                                 },
-
                               ),
-                              responsiveSizedBox(context: context , percentageOfHeight: .02),
+                              responsiveSizedBox(
+                                  context: context, percentageOfHeight: .02),
                               EntryField(
                                 controller: _phone,
                                 hint: "Phone Number",
                                 prefixIcon: Icons.phone_iphone,
-                                color: Theme.of(context)
-                                    .scaffoldBackgroundColor,
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor,
                                 validation: (value) {
-                                  if (value.isEmpty ||
-                                      value.length < 10) {
+                                  if (value.isEmpty || value.length < 10) {
                                     return 'please enter correct phone number';
                                   }
                                 },
-
                               ),
-                              responsiveSizedBox(context: context , percentageOfHeight: .02),
+                              responsiveSizedBox(
+                                  context: context, percentageOfHeight: .02),
                               EntryField(
                                 controller: _password,
                                 hint: "Password",
                                 prefixIcon: Icons.lock_outline,
-                                color: Theme.of(context)
-                                    .scaffoldBackgroundColor,
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor,
                                 validation: (value) {
-                                  if (value.isEmpty ||
-                                      value.length < 6) {
+                                  if (value.isEmpty || value.length < 6) {
                                     return "please enter password greater than 6 character";
                                   }
                                 },
-
                               ),
-                              responsiveSizedBox(context: context , percentageOfHeight: .02),
-                              if (state
-                              is! MezaynLoginLoadingState) ...[
+                              responsiveSizedBox(
+                                  context: context, percentageOfHeight: .02),
+                              if (state is! MezaynLoginLoadingState) ...[
                                 Container(
-
                                     height: height * .08,
+                                    child: CustomButton(
+                                        text: translator.translate("Register"),
+                                        onTapButton: () {
+                                          print("add address tapped ");
 
-                                    child:CustomButton(text:translator.translate("Register"), onTapButton:()
-                                    {
-                                      print(
-                                          "add address tapped ");
-
-                                      DioHelper.postDataForRegister(
-                                    url: "//register",
-                                    data: {
-                                      "name" : _name.text,
-                                      "phone":_phone.text,
-                                      "email":_email.text ,
-                                      "password":_password.text ,
-                                      "type":"barber" },
-
-                                    ).then((value) async {
-                                    final response =
-                                    value.data;
-                                    print("response for register is ${value.data}");
-                                    if(value.statusCode == 200 && value.data["validation_error"] != null ){
-                                      ScaffoldMessenger.of(
-                                          context)
-                                          .showSnackBar(
-                                          SnackBar(
-                                            content: Text("The email has already been taken., The phone has already been taken"),
-                                          ));
-                                    } else{
-                                      ScaffoldMessenger.of(
-                                          context)
-                                          .showSnackBar(
-                                          SnackBar(
-                                            content: Text("Welcome ${value.data["user"]["name"]} !"),
-                                          ));
-                                       customPushNamedNavigation(context,value.data["user"]["type"] == "user"?  AppTab() :AppTabForBarber() );
-                                       print("user name is ${value.data["user"]["name"]}");
-                                      print("user email is ${value.data["user"]["email"]}");
-                                      print("user phone  is ${value.data["user"]["phone"]}");
-                                      CacheHelper.putStringData(key: "token", value: value.data["access_token"]["token"]);
-                                      CacheHelper.putStringData(key: "user_name", value: value.data["user"]["name"]);
-                                      CacheHelper.putStringData(key: "user_email", value: value.data["user"]["email"]);
-                                       CacheHelper.putStringData(key: "user_phone", value: value.data["user"]["phone"] ,);
-                                      CacheHelper.putStringData(key: "user_id", value: value.data["user"]["phone"] ,);
-                                      CacheHelper.putStringData(key: "user_type", value: value.data["user"]["type"] ,);
-                                      CacheHelper.putStringData(key: "user_image", value: value.data["user"]["image"] ,);
-                                      await CacheHelper.init();
-                                      token  = CacheHelper.getStringData(key: 'token');
-
-
-                                    }
-
-                                      });
-                                    }
-                                    )
-                                ),
+                                          DioHelper.postDataForRegister(
+                                            url: "//register",
+                                            data: {
+                                              "name": _name.text,
+                                              "phone": _phone.text,
+                                              "email": _email.text,
+                                              "password": _password.text,
+                                              "type": "barber"
+                                            },
+                                          ).then((value) async {
+                                            final response = value.data;
+                                            print(
+                                                "response for register is ${value.data}");
+                                            if (value.statusCode == 200 &&
+                                                value.data[
+                                                        "validation_error"] !=
+                                                    null) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(SnackBar(
+                                                content: Text(
+                                                    "The email has already been taken., The phone has already been taken"),
+                                              ));
+                                            } else {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(SnackBar(
+                                                content: Text(
+                                                    "Welcome ${value.data["user"]["name"]} !"),
+                                              ));
+                                              customPushNamedNavigation(
+                                                  context,
+                                                  value.data["user"]["type"] ==
+                                                          "user"
+                                                      ? AppTab()
+                                                      : AppTab());
+                                              print(
+                                                  "user name is ${value.data["user"]["name"]}");
+                                              print(
+                                                  "user email is ${value.data["user"]["email"]}");
+                                              print(
+                                                  "user phone  is ${value.data["user"]["phone"]}");
+                                              CacheHelper.putStringData(
+                                                  key: "token",
+                                                  value:
+                                                      value.data["access_token"]
+                                                          ["token"]);
+                                              CacheHelper.putStringData(
+                                                  key: "user_name",
+                                                  value: value.data["user"]
+                                                      ["name"]);
+                                              CacheHelper.putStringData(
+                                                  key: "user_email",
+                                                  value: value.data["user"]
+                                                      ["email"]);
+                                              CacheHelper.putStringData(
+                                                key: "user_phone",
+                                                value: value.data["user"]
+                                                    ["phone"],
+                                              );
+                                              CacheHelper.putStringData(
+                                                key: "user_id",
+                                                value: value.data["user"]
+                                                    ["phone"],
+                                              );
+                                              CacheHelper.putStringData(
+                                                key: "user_type",
+                                                value: value.data["user"]
+                                                    ["type"],
+                                              );
+                                              CacheHelper.putStringData(
+                                                key: "user_image",
+                                                value: value.data["user"]
+                                                    ["image"],
+                                              );
+                                              await CacheHelper.init();
+                                              token = CacheHelper.getStringData(
+                                                  key: 'token');
+                                            }
+                                          });
+                                        })),
                               ] else ...[
                                 Container(
                                   height: height * 0.1,
                                   child: Center(child: spinKit),
                                 ),
                               ],
-                              responsiveSizedBox(context: context , percentageOfHeight: .02),
+                              responsiveSizedBox(
+                                  context: context, percentageOfHeight: .02),
                               Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     "Already have an account !",
                                     style: Theme.of(context)
                                         .textTheme
                                         .subtitle1
-                                        .copyWith(
-                                        fontSize:
-                                        height * .018),
+                                        .copyWith(fontSize: height * .018),
                                   ),
                                   GestureDetector(
                                       onTap: () {
-                                       customPushNamedNavigation(context, LoginScreen());
+                                        customPushNamedNavigation(
+                                            context, LoginScreen());
                                       },
                                       child: Text(
                                         "Login",
                                         style: Theme.of(context)
                                             .textTheme
                                             .subtitle1
-                                            .copyWith(
-                                            fontSize:
-                                            height *
-                                                .024),
+                                            .copyWith(fontSize: height * .024),
                                       ))
                                 ],
                               ),
-                              responsiveSizedBox(context: context , percentageOfHeight: .005),
-                              customDescriptionTextText(context: context , text: translator.translate("Or")),
-                              responsiveSizedBox(context: context , percentageOfHeight: .005),
-                              Row(mainAxisAlignment: MainAxisAlignment.center,
+                              responsiveSizedBox(
+                                  context: context, percentageOfHeight: .005),
+                              customDescriptionTextText(
+                                  context: context,
+                                  text: translator.translate("Or")),
+                              responsiveSizedBox(
+                                  context: context, percentageOfHeight: .005),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-
                                   Image.asset(AppIcons.facebook),
-                                  SizedBox(width: width*.03,),
+                                  SizedBox(
+                                    width: width * .03,
+                                  ),
                                   Image.asset(AppIcons.google)
-
-                                ],)
-
-
+                                ],
+                              )
                             ],
                           ),
                         ),

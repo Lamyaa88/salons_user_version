@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:collection';
 import 'package:almezyn/screens/more/add_address_screen.dart';
-import 'package:almezyn/screens/other/order_screen.dart';
 import 'package:almezyn/utils/file_export.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';

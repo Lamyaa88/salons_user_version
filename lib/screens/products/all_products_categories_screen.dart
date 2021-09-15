@@ -1,16 +1,11 @@
 import 'package:almezyn/app_cubits/categories/all_categories_cubit/all_categories_cubit.dart';
-import 'package:almezyn/app_cubits/categories/all_categories_cubit/all_categories_cubit.dart';
-import 'package:almezyn/app_cubits/categories/all_categories_cubit/all_categories_cubit.dart';
 import 'package:almezyn/app_cubits/categories/all_categories_cubit/all_categories_state.dart';
-import 'package:almezyn/app_cubits/specifications/all_categories_cubit/all_specifications_cubit.dart';
-import 'package:almezyn/app_cubits/specifications/all_categories_cubit/all_specificationss_state.dart';
 import 'package:almezyn/screens/products/all_products_screen.dart';
 import 'package:almezyn/utils/check_direction.dart';
 import 'package:almezyn/utils/constants.dart';
 import 'package:almezyn/utils/file_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
-import 'package:almezyn/screens/salons/single_salon_category_screen.dart';
 
 class AllProductsCategoriesScreen extends StatelessWidget {
   @override

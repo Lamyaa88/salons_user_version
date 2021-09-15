@@ -8,7 +8,6 @@ import 'package:almezyn/utils/file_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:almezyn/app_cubits/specifications/all_categories_cubit/all_specifications_cubit.dart';
-import 'package:almezyn/screens/salons/widgets/specifications_list_view.dart';
 import 'package:almezyn/screens/barbers/widgets/explore_list_view.dart';
 class BarbersHomeScreen extends StatefulWidget {
   @override
@@ -79,7 +78,7 @@ class _BarbersHomeScreenState extends State<BarbersHomeScreen> {
                         child: ListView(
 //              physics: BouncingScrollPhysics(),
                           children: <Widget>[
-                            responsiveSizedBox(context: context, percentageOfHeight: .0) ,
+                            responsiveSizedBox(context: context, percentageOfHeight: .0,) ,
                             boldTitleRow(context: context , text: "Find barbers" , withViewMore: false
                                 ,textColor: blackColor , fontWeight: FontWeight.bold , heightPercentage: .03) ,
                             responsiveSizedBox(context: context, percentageOfHeight: .02) ,
@@ -88,9 +87,7 @@ class _BarbersHomeScreenState extends State<BarbersHomeScreen> {
                                 searchInputs = v ;
                               });
                               print(searchInputs) ;
-                            },
-
-                            ),
+                            },),
                             responsiveSizedBox(context: context, percentageOfHeight: .03),
                             Container(
                                 child:
@@ -99,16 +96,16 @@ class _BarbersHomeScreenState extends State<BarbersHomeScreen> {
                                 Column(
                                   children: [
                                     Column(children: [
-                                      boldTitleRow(context: context , text: "Explore") ,
+                                      boldTitleRow(context: context , text: "Explore" ,withViewMore: false) ,
                                       responsiveSizedBox(context: context, percentageOfHeight: .03) ,
                                       exploreListView(context : context),
                                       responsiveSizedBox(context: context, percentageOfHeight: .03) ,
-                                      boldTitleRow(context: context , text: "ads") ,
+                                      boldTitleRow(context: context , text: "ads" , withViewMore: false ) ,
                                       responsiveSizedBox(context: context, percentageOfHeight: .03) ,
-                                     adsListView(context: context),
+                                      adsListView(context: context),
                                       responsiveSizedBox(context: context, percentageOfHeight: .03)
                                       ,],),],):searchBarbersPart(context : context , searchWord: searchInputs)),
-                            responsiveSizedBox(context: context, percentageOfHeight: .3) ,
+                                      responsiveSizedBox(context: context, percentageOfHeight: .3) ,
 
                           ],
                         ),

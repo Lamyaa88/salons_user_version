@@ -1,5 +1,4 @@
-import 'package:almezyn/app_cubits/products/all_products_cubit/all_products_cubit.dart';
-import 'package:almezyn/app_cubits/products/all_products_cubit/all_products_state.dart';
+
 import 'package:almezyn/app_cubits/saved/all_saved_products_cubit/all_saved_products_cubit.dart';
 import 'package:almezyn/app_cubits/saved/all_saved_products_cubit/all_saved_products_state.dart';
 import 'package:almezyn/screens/more/saved_Screen.dart';
@@ -7,7 +6,6 @@ import 'package:almezyn/screens/products/single_product_details_screen.dart';
 import 'package:almezyn/utils/constants.dart';
 import 'package:almezyn/utils/file_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:localize_and_translate/localize_and_translate.dart';
 savedProductsGridView({BuildContext context}) {
   double height = MediaQuery.of(context).size.height;
   double width = MediaQuery.of(context).size.width;

@@ -1,7 +1,5 @@
 import 'package:almezyn/app_cubits/offers/single_offer_cubit/single_offer_cubit.dart';
 import 'package:almezyn/app_cubits/offers/single_offer_cubit/single_offer_state.dart';
-import 'package:almezyn/app_cubits/products/single_product_cubit/single_product_cubit.dart';
-import 'package:almezyn/app_cubits/products/single_product_cubit/single_product_state.dart';
 import 'package:almezyn/utils/check_direction.dart';
 import 'package:almezyn/utils/constants.dart';
 import 'package:almezyn/utils/file_export.dart';

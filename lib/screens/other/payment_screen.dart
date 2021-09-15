@@ -1,7 +1,4 @@
-
-import 'package:almezyn/custom_widgets/custom_single_salon_card.dart';
 import 'package:almezyn/utils/file_export.dart';
-import 'package:almezyn/custom_widgets/custom_single_item_will_be_ordered_card.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 class PaymentScreen extends StatefulWidget {
   @override
